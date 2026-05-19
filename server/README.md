@@ -13,17 +13,27 @@ A full-stack CRM-style application currently in development. This repository con
 - Lead Assignment System
 - Dashboard Statistics API
 
-### 🚧 Frontend (Coming Soon)
-- React.js UI
+### 🚧 Frontend (In Progress)
+- React + Vite setup
+- React Router
 - Login/Register Pages
-- Dashboard UI
-- Lead Management Interface
-- Role-based UI rendering
+- JWT Authentication Flow
+- Toast Notifications
+- Dashboard Page
+- API Integration with Backend
 
+### 🔜 Upcoming Frontend Features
+- Tailwind CSS UI
+- Dashboard Analytics Cards
+- Lead Management UI
+- Protected Routes
+- Role-based UI rendering
+- Responsive Design
 ---
 
-## 🏗️ Tech Stack (Backend)
+## 🏗️ Tech Stack
 
+### Backend
 - Node.js
 - Express.js
 - MongoDB + Mongoose
@@ -31,6 +41,13 @@ A full-stack CRM-style application currently in development. This repository con
 - bcrypt
 - dotenv
 - CORS
+
+### Frontend
+- React.js
+- Vite
+- React Router DOM
+- Axios
+- React Toastify
 
 ---
 
