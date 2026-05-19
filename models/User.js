@@ -7,6 +7,12 @@ const userSchema = new mongoose.Schema(
       required: true,
     },
 
+    role: {
+      type: String,
+      enum: ["admin", "recruiter", "candidate"],
+      default: "candidate", // default role is candidate (comma can meke problems)
+    },
+
     email: {
       type: String,
       required: true,
