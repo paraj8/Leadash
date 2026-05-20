@@ -1,14 +1,24 @@
 const Lead = require("../models/Lead");
 
-// GET DASHBOARD STATS
-const getStats = async (req, res) => {
+const getDashboardStats = async (req, res) => {
   try {
     const totalLeads = await Lead.countDocuments();
 
-    const pending = await Lead.countDocuments({ status: "pending" });
-    const contacted = await Lead.countDocuments({ status: "contacted" });
-    const hired = await Lead.countDocuments({ status: "hired" });
-    const rejected = await Lead.countDocuments({ status: "rejected" });
+    const pending = await Lead.countDocuments({
+      status: "Pending",
+    });
+
+    const contacted = await Lead.countDocuments({
+      status: "Contacted",
+    });
+
+    const hired = await Lead.countDocuments({
+      status: "Hired",
+    });
+
+    const rejected = await Lead.countDocuments({
+      status: "Rejected",
+    });
 
     res.json({
       totalLeads,
@@ -17,9 +27,14 @@ const getStats = async (req, res) => {
       hired,
       rejected,
     });
+
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({
+      message: error.message,
+    });
   }
 };
 
-module.exports = { getStats };
+module.exports = {
+  getDashboardStats,
+};

@@ -2,26 +2,31 @@ const mongoose = require("mongoose");
 
 const leadSchema = new mongoose.Schema(
   {
-    title: String,
-    company: String,
+    title: { type: String, required: true },
+    company: { type: String, required: true },
+
     status: {
       type: String,
-      enum: ["pending", "contacted", "hired", "rejected"],
-      default: "pending",
+      enum: ["Pending", "Contacted", "Hired", "Rejected"],
+      default: "Pending",
     },
-    assignedTo: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+
+    priority: {
+      type: String,
+      enum: ["Low", "Medium", "High"],
+      default: "Low",
     },
+
+    notes: String,
+
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
-    notes: String,
-    priority: {
-      type: String,
-      enum: ["low", "medium", "high"],
-      default: "medium",
+
+    assignedTo: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
     },
   },
   { timestamps: true }

@@ -4,10 +4,11 @@ require("dotenv").config();
 
 const connectDB = require("./config/db"); 
 const authRoutes = require("./routes/authRoutes");
+const dashboardRoutes = require("./routes/dashboardRoutes"); // Import dashboard routes
 
 const app = express();
 connectDB();
-
+app.use("/api/dashboard", dashboardRoutes);  // Mount dashboard routes before auth routes
 app.use(cors());
 app.use(express.json());
 app.use("/api/auth", authRoutes);

@@ -1,9 +1,12 @@
 import { useState } from "react";
-import API from "../services/api";
+import { useNavigate } from "react-router-dom";
+import API from "../api";
 import { toast } from "react-toastify";
 
 function Register() {
-  const [formData, setFormData] = useState({
+  const navigate = useNavigate();
+
+  const [form, setForm] = useState({
     name: "",
     email: "",
     password: "",
@@ -11,69 +14,91 @@ function Register() {
   });
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const res = await API.post("/auth/register", formData);
+      await API.post("/auth/register", form);
 
-      toast.success(res.data.message);
-      console.log(res.data);
-    } catch (error) {
-      toast.error(error.response?.data?.message || "Registration failed");
+      toast.success("Account created successfully!");
+
+      navigate("/login");
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Registration failed");
     }
   };
 
   return (
-    <div>
-      <h1>Register</h1>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-950 to-slate-900 text-white">
 
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="name"
-          placeholder="Name"
-          onChange={handleChange}
-        />
+      <div className="w-full max-w-md p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-xl">
 
-        <br />
+        <h1 className="text-3xl font-black text-center mb-2">
+          Create Account
+        </h1>
 
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          onChange={handleChange}
-        />
+        <p className="text-center text-slate-400 mb-8">
+          Join Leadash CRM
+        </p>
 
-        <br />
+        <form onSubmit={handleSubmit} className="space-y-4">
 
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          onChange={handleChange}
-        />
+          <input
+            name="name"
+            placeholder="Full Name"
+            value={form.name}
+            onChange={handleChange}
+            className="w-full p-3 rounded-xl bg-black/30 border border-white/10"
+          />
 
-        <br />
+          <input
+            name="email"
+            placeholder="Email"
+            value={form.email}
+            onChange={handleChange}
+            className="w-full p-3 rounded-xl bg-black/30 border border-white/10"
+          />
 
-        {/* ROLE SELECT */}
-        <select name="role" onChange={handleChange}>
-          <option value="candidate">Candidate</option>
-          <option value="recruiter">Recruiter</option>
-          <option value="admin">Admin</option>
-        </select>
+          <input
+            name="password"
+            type="password"
+            placeholder="Password"
+            value={form.password}
+            onChange={handleChange}
+            className="w-full p-3 rounded-xl bg-black/30 border border-white/10"
+          />
 
-        <br />
-        <br />
+          <select
+            name="role"
+            value={form.role}
+            onChange={handleChange}
+            className="w-full p-3 rounded-xl bg-black/30 border border-white/10"
+          >
+            <option value="candidate">Candidate</option>
+            <option value="recruiter">Recruiter</option>
+          </select>
 
-        <button type="submit">Register</button>
-      </form>
+          <button
+            type="submit"
+            className="w-full bg-cyan-500 text-black font-bold py-3 rounded-xl hover:bg-cyan-400 transition"
+          >
+            Register
+          </button>
+        </form>
+
+        <p className="text-center text-sm text-slate-400 mt-6">
+          Already have an account?{" "}
+          <span
+            onClick={() => navigate("/login")}
+            className="text-cyan-400 cursor-pointer"
+          >
+            Login
+          </span>
+        </p>
+      </div>
     </div>
   );
 }

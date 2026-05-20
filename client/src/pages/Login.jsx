@@ -1,75 +1,92 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import API from "../services/api";
+import API from "../api";
 import { toast } from "react-toastify";
 
 function Login() {
   const navigate = useNavigate();
 
-  const [formData, setFormData] = useState({
+  const [form, setForm] = useState({
     email: "",
     password: "",
   });
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-try {
-  const res = await API.post("/auth/login", formData);
+    try {
+      const res = await API.post("/auth/login", form);
 
-  // SAVE TOKEN
-  localStorage.setItem("token", res.data.token);
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
 
-  // SAVE USER
-  localStorage.setItem("user", JSON.stringify(res.data.user));
+      toast.success(`Welcome back ${res.data.user.name}`);
 
-  // DIRECT ACCESS
-  const user = res.data.user;
+      // role-based redirect (IMPORTANT for next phase)
+      const role = res.data.user.role;
 
-  toast.success(
-    `Login successful! Welcome back ${user.name} (${user.role})`
-  );
+      if (role === "admin") navigate("/admin");
+      else if (role === "recruiter") navigate("/recruiter");
+      else navigate("/dashboard");
 
-  navigate("/dashboard");
-
-} catch (error) {
-  toast.error(error.response?.data?.message || "Login failed");
-}
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Login failed");
+    }
   };
 
   return (
-    <div>
-      <h1>Login</h1>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-950 to-slate-900 text-white">
+      <div className="w-full max-w-md p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-xl">
 
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          onChange={handleChange}
-        />
+        <h1 className="text-3xl font-black text-center mb-2">
+          Welcome Back
+        </h1>
 
-        <br />
+        <p className="text-center text-slate-400 mb-8">
+          Login to your Leadash dashboard
+        </p>
 
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          onChange={handleChange}
-        />
+        <form onSubmit={handleSubmit} className="space-y-4">
 
-        <br />
-        <br />
+          <input
+            name="email"
+            placeholder="Email"
+            value={form.email}
+            onChange={handleChange}
+            className="w-full p-3 rounded-xl bg-black/30 border border-white/10"
+          />
 
-        <button type="submit">Login</button>
-      </form>
+          <input
+            name="password"
+            type="password"
+            placeholder="Password"
+            value={form.password}
+            onChange={handleChange}
+            className="w-full p-3 rounded-xl bg-black/30 border border-white/10"
+          />
+
+          <button
+            type="submit"
+            className="w-full bg-cyan-500 text-black font-bold py-3 rounded-xl hover:bg-cyan-400 transition"
+          >
+            Login
+          </button>
+        </form>
+
+        <p className="text-center text-sm text-slate-400 mt-6">
+          Don't have an account?{" "}
+          <span
+            onClick={() => navigate("/register")}
+            className="text-cyan-400 cursor-pointer"
+          >
+            Register
+          </span>
+        </p>
+      </div>
     </div>
   );
 }
