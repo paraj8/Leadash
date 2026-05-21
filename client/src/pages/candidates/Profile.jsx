@@ -1,11 +1,11 @@
-function Candidates() {
+function Profile() {
   return (
     <div className="text-white">
       <h1 className="text-4xl font-black">
-        Candidates
+        Profile
       </h1>
     </div>
   );
 }
 
-export default Candidates;
+export default Profile;

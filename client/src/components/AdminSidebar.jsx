@@ -5,12 +5,14 @@ function AdminSidebar() {
 
   const user = JSON.parse(localStorage.getItem("user"));
 
-  const menuItems = [
-    { name: "Dashboard", path: "/admin" },
-    { name: "Leads", path: "/admin/leads" },
-    { name: "Recruiters", path: "/admin/recruiters" },
-    { name: "Candidates", path: "/admin/candidates" },
-  ];
+const menuItems = [
+  { name: "Dashboard", path: "/admin" },
+  { name: "Create Skills", path: "/admin/create-skills" },
+  { name: "Create Tasks", path: "/admin/create-task" },
+  { name: "All Tasks", path: "/admin/tasks" },
+  { name: "Recruiters", path: "/admin/recruiters" },
+  { name: "Candidates", path: "/admin/candidates" },
+];
 
   const logoutHandler = () => {
     localStorage.removeItem("token");
