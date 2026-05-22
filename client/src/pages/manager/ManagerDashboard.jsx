@@ -1,13 +1,13 @@
-function Admin() {
+function ManagerDashboard() {
   return (
     <div>
 
       <h1 className="text-4xl font-black">
-        Admin Dashboard
+        Manager Dashboard
       </h1>
 
       <p className="text-slate-500 dark:text-slate-400 mt-2">
-        Manage platform tasks, recruiters and candidates
+        Manage platform tasks, managers and candidates
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mt-10">
@@ -66,4 +66,4 @@ function Admin() {
   );
 }
 
-export default Admin;
+export default ManagerDashboard;

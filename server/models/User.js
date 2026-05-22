@@ -9,8 +9,8 @@ const userSchema = new mongoose.Schema(
 
     role: {
       type: String,
-      enum: ["admin", "recruiter", "candidate"],
-      default: "candidate", // default role is candidate (comma can meke problems)
+      enum: ["admin", "manager", "worker"],
+      default: "worker", // default role is worker (comma can meke problems)
     },
 
     email: {

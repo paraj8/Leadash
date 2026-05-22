@@ -7,11 +7,11 @@ function AdminSidebar() {
 
 const menuItems = [
   { name: "Dashboard", path: "/admin" },
-  { name: "Create Skills", path: "/admin/create-skills" },
-  { name: "Create Tasks", path: "/admin/create-task" },
-  { name: "All Tasks", path: "/admin/tasks" },
-  { name: "Recruiters", path: "/admin/recruiters" },
-  { name: "Candidates", path: "/admin/candidates" },
+  { name: "Create Skills", path: "/admin/admin-create-skills" },
+  { name: "Create Tasks", path: "/admin/admin-create-task" },
+  { name: "All Tasks", path: "/admin/admin-all-tasks" },
+  { name: "Managers", path: "/admin/admin-managers" },
+  { name: "Workers", path: "/admin/admin-workers" },
 ];
 
   const logoutHandler = () => {

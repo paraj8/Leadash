@@ -1,11 +1,11 @@
-function Candidates() {
+function AdminWorkers() {
   return (
     <div className="text-white p-6">
       <h1 className="text-4xl font-black">
-        Candidates
+        All Workers
       </h1>
     </div>
   );
 }
 
-export default Candidates;
+export default AdminWorkers;

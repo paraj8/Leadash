@@ -1,11 +1,11 @@
-function Profile() {
+function WorkerProfile() {
   return (
     <div className="text-white">
       <h1 className="text-4xl font-black">
-        Profile
+        Worker Profile
       </h1>
     </div>
   );
 }
 
-export default Profile;
+export default WorkerProfile;

@@ -1,20 +1,20 @@
 import { Outlet } from "react-router-dom";
 
-import RecruiterSidebar from "./RecruiterSidebar";
+import ManagerSidebar from "../components/ManagerSidebar";
 import Navbar from "./Navbar";
 
-function RecruiterLayout() {
+function ManagerLayout() {
   return (
     <div className="flex min-h-screen bg-slate-100 dark:bg-slate-950 transition-colors duration-300">
 
       {/* SIDEBAR */}
-      <RecruiterSidebar />
+      <ManagerSidebar />
 
       {/* RIGHT SIDE */}
       <div className="flex-1 flex flex-col">
 
         {/* NAVBAR */}
-        <Navbar title="Recruiter Dashboard" />
+        <Navbar title="Manager Dashboard" />
 
         {/* PAGE CONTENT */}
         <main className="flex-1 p-6 text-black dark:text-white">
@@ -27,4 +27,4 @@ function RecruiterLayout() {
   );
 }
 
-export default RecruiterLayout;
+export default ManagerLayout;

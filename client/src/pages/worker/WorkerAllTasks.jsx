@@ -1,11 +1,11 @@
-function AllTasks() {
+function WorkerAllTasks() {
 
   const tasks = [
   {
     id: 1,
     title: "Build Landing Page",
     company: "EasyLife",
-    candidates: ["Paraj", "Rahul"],
+    worker: ["Paraj", "Rahul"],
     status: "Pending",
     date: "21 May 2026",
   },
@@ -13,7 +13,7 @@ function AllTasks() {
     id: 2,
     title: "Fix Dashboard UI",
     company: "TechNova",
-    candidates: ["Aman"],
+    worker: ["Aman"],
     status: "In Progress",
     date: "20 May 2026",
   },
@@ -21,7 +21,7 @@ function AllTasks() {
     id: 3,
     title: "Create API Integration",
     company: "Leadash",
-    candidates: ["Rahul", "Aman", "Paraj"],
+    worker: ["Rahul", "Aman", "Paraj"],
     status: "Completed",
     date: "18 May 2026",
   },
@@ -35,7 +35,7 @@ function AllTasks() {
       </h1>
 
       <p className="text-slate-500 dark:text-slate-400 mt-2">
-        Manage all created tasks and candidate progress
+        Manage all created tasks and worker progress
       </p>
 
       <div className="mt-10 overflow-x-auto rounded-3xl border border-black/10 dark:border-white/10">
@@ -55,25 +55,25 @@ function AllTasks() {
               </th>
 
               <th className="p-5 font-semibold">
-                Candidate
+                Worker
               </th>
 
 
 
-{/* CANDIDATES from database
+{/* WORKERS from database
 
 
 <td className="p-5">
 
   <div className="flex flex-wrap gap-2">
 
-    {task.candidates.map((candidate) => (
+    {task.worker.map((worker) => (
 
       <span
-        key={candidate}
+        key={worker}
         className="px-3 py-1 rounded-full text-sm bg-slate-200 dark:bg-white/10"
       >
-        {candidate}
+        {worker}
       </span>
 
     ))}
@@ -115,7 +115,7 @@ function AllTasks() {
                 </td>
 
                 <td className="p-5">
-                  {task.candidate}
+                  {task.worker}
                 </td>
 
                 <td className="p-5">
@@ -155,4 +155,4 @@ function AllTasks() {
   );
 }
 
-export default AllTasks;
+export default WorkerAllTasks;

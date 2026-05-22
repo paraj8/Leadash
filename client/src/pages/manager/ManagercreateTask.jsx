@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function CreateTask() {
+function ManagerCreateTask() {
 
   const [formData, setFormData] = useState({
     title: "",
@@ -265,4 +265,4 @@ function CreateTask() {
   );
 }
 
-export default CreateTask;
+export default ManagerCreateTask;

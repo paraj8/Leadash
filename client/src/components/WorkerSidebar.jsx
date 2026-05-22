@@ -1,14 +1,14 @@
 import { Link, useLocation } from "react-router-dom";
 
-function RecruiterSidebar() {
+function WorkerSidebar() {
   const location = useLocation();
 
   const user = JSON.parse(localStorage.getItem("user"));
 
   const menuItems = [
-    { name: "Dashboard", path: "/recruiter" },
-    { name: "Leads", path: "/recruiter/leads" },
-    { name: "Candidates", path: "/recruiter/candidates" },
+    { name: "Dashboard", path: "/worker" },
+    { name: "My Tasks", path: "/worker/worker-all-tasks" },
+    { name: "My Profile", path: "/worker/worker-profile" },
   ];
 
   const logoutHandler = () => {
@@ -32,7 +32,7 @@ function RecruiterSidebar() {
           </h1>
 
           <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">
-            Recruiter Workspace
+            Worker Workspace
           </p>
 
         </div>
@@ -100,4 +100,4 @@ function RecruiterSidebar() {
   );
 }
 
-export default RecruiterSidebar;
+export default WorkerSidebar;

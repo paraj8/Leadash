@@ -5,27 +5,28 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 
 /* LAYOUTS */
-import AdminLayout from "./components/AdminLayout";
-import RecruiterLayout from "./components/RecruiterLayout";
-import CandidateLayout from "./components/CandidateLayout";
+import AdminLayout from "./layouts/AdminLayout";
+import ManagerLayout from "./layouts/ManagerLayout.jsx";
+import WorkerLayout from "./layouts/WorkerLayout.jsx";
 
 /* ADMIN PAGES */
 import AdminDashboard from "./pages/admin/AdminDashboard";
-import CreateSkills from "./pages/admin/CreateSkills";
-import CreateTask from "./pages/admin/CreateTask";
-import AllTasks from "./pages/admin/AllTasks";
-import Recruiters from "./pages/admin/Recruiters";
-import Candidates from "./pages/admin/Candidates";
+import AdminCreateSkills from "./pages/admin/AdminCreateSkills.jsx";
+import AdminCreateTask from "./pages/admin/AdminCreateTask.jsx";
+import AdminAllTasks from "./pages/admin/AdminAllTasks.jsx";
+import AdminManagers from "./pages/admin/AdminManagers.jsx";
+import AdminWorkers from "./pages/admin/AdminWorkers.jsx";
 
-/* RECRUITER PAGES 
-import RecruiterDashboard from "./pages/recruiter/Dashboard";
-import RecruiterTasks from "./pages/recruiter/AllTasks";
-import RecruiterCandidates from "./pages/recruiter/Candidates";*/
+/* MANAGER PAGES */
+import ManagerDashboard from "./pages/manager/ManagerDashboard";
+import ManagerAllTasks from "./pages/manager/ManagerAllTasks.jsx";
+import ManagerCreateTask from "./pages/manager/ManagerCreateTask.jsx";
+import ManagerWorkers from "./pages/manager/ManagerWorkers.jsx";
 
-/* CANDIDATE PAGES 
-import CandidateDashboard from "./pages/candidate/Dashboard";
-import CandidateProfile from "./pages/candidate/Profile";
-import CandidateTasks from "./pages/candidate/AllTasks";*/
+/* WORKER PAGES */
+import WorkerDashboard from "./pages/worker/WorkerDashboard.jsx";
+import WorkerProfile from "./pages/worker/WorkerProfile.jsx";
+import WorkerAllTasks from "./pages/worker/WorkerAllTasks.jsx";
 
 function App() {
   return (
@@ -41,31 +42,32 @@ function App() {
         <Route path="/admin" element={<AdminLayout />}>
 
           <Route index element={<AdminDashboard />} />
-          <Route path="/admin/create-skills" element={<CreateSkills />} />
-          <Route path="/admin/create-task" element={<CreateTask />} />
-          <Route path="/admin/tasks" element={<AllTasks />} />
-          <Route path="/admin/recruiters" element={<Recruiters />} />
-          <Route path="/admin/candidates" element={<Candidates />} />
+          <Route path="/admin/admin-create-skills" element={<AdminCreateSkills />} />
+          <Route path="/admin/admin-create-task" element={<AdminCreateTask />} />
+          <Route path="/admin/admin-all-tasks" element={<AdminAllTasks />} />
+          <Route path="/admin/admin-managers" element={<AdminManagers />} />
+          <Route path="/admin/admin-workers" element={<AdminWorkers />} />
 
         </Route>
 
-        {/* ================= RECRUITER ================= 
-        <Route path="/recruiter" element={<RecruiterLayout />}>
+        {/* ================= MANAGER ================= */}
+        <Route path="/manager" element={<ManagerLayout />}>
 
-          <Route index element={<RecruiterDashboard />} />
-          <Route path="tasks" element={<RecruiterTasks />} />
-          <Route path="candidates" element={<RecruiterCandidates />} />
+          <Route index element={<ManagerDashboard />} />
+          <Route path="/manager/manager-create-tasks" element={<ManagerCreateTask />} />
+          <Route path="/manager/manager-all-tasks" element={<ManagerAllTasks />} />
+          <Route path="/manager/manager-workers" element={<ManagerWorkers />} />
 
-        </Route>*/}
+        </Route>
 
-        {/* ================= CANDIDATE ================= 
-        <Route path="/candidate" element={<CandidateLayout />}>
+        {/* ================= WORKER ================= */}
+        <Route path="/worker" element={<WorkerLayout />}>
 
-          <Route index element={<CandidateDashboard />} />
-          <Route path="profile" element={<CandidateProfile />} />
-          <Route path="tasks" element={<CandidateTasks />} />
+          <Route index element={<WorkerDashboard />} />
+          <Route path="/worker/worker-profile" element={<WorkerProfile />} />
+          <Route path="/worker/worker-all-tasks" element={<WorkerAllTasks />} />
 
-        </Route>*/}
+        </Route>
 
       </Routes>
     </BrowserRouter>

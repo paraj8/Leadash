@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function CreateSkills() {
+function AdminCreateSkills() {
 
   const [skill, setSkill] = useState("");
 
@@ -58,4 +58,4 @@ function CreateSkills() {
   );
 }
 
-export default CreateSkills;
+export default AdminCreateSkills;

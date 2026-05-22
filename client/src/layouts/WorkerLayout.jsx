@@ -1,21 +1,20 @@
 import { Outlet } from "react-router-dom";
 
-import AdminSidebar from "./AdminSidebar";
-// import Admin from "../pages/Admin";
+import WorkerSidebar from "../components/WorkerSidebar";
 import Navbar from "./Navbar";
 
-function AdminLayout() {
+function WorkerLayout() {
   return (
     <div className="flex min-h-screen bg-slate-100 dark:bg-slate-950 transition-colors duration-300">
 
       {/* SIDEBAR */}
-      <AdminSidebar />
+      <WorkerSidebar />
 
       {/* RIGHT SIDE */}
       <div className="flex-1 flex flex-col">
 
         {/* NAVBAR */}
-        <Navbar title="Admin Dashboard" />
+        <Navbar title="Worker Dashboard" />
 
         {/* PAGE CONTENT */}
         <main className="flex-1 p-6 text-black dark:text-white">
@@ -28,4 +27,4 @@ function AdminLayout() {
   );
 }
 
-export default AdminLayout;
+export default WorkerLayout;

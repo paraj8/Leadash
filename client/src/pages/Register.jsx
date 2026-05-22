@@ -10,7 +10,7 @@ function Register() {
     name: "",
     email: "",
     password: "",
-    role: "candidate",
+    role: "worker",
   });
 
   const handleChange = (e) => {
@@ -77,8 +77,8 @@ function Register() {
             onChange={handleChange}
             className="w-full p-3 rounded-xl bg-black/30 border border-white/10"
           >
-            <option value="candidate">Candidate</option>
-            <option value="recruiter">Recruiter</option>
+            <option value="worker">Worker</option>
+            <option value="manager">Manager</option>
           </select>
 
           <button

@@ -30,8 +30,8 @@ function Login() {
       const role = res.data.user.role;
 
       if (role === "admin") navigate("/admin");
-      else if (role === "recruiter") navigate("/recruiter");
-      else navigate("/dashboard");
+      else if (role === "manager") navigate("/manager");
+      else navigate("/worker");
 
     } catch (err) {
       toast.error(err.response?.data?.message || "Login failed");

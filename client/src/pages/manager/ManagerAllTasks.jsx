@@ -1,4 +1,4 @@
-function AllTasks() {
+function ManagerAllTasks() {
 
   const tasks = [
   {
@@ -155,4 +155,4 @@ function AllTasks() {
   );
 }
 
-export default AllTasks;
+export default ManagerAllTasks;

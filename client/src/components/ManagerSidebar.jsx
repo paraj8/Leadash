@@ -1,15 +1,17 @@
 import { Link, useLocation } from "react-router-dom";
 
-function CandidateSidebar() {
+function ManagerSidebar() {
   const location = useLocation();
 
   const user = JSON.parse(localStorage.getItem("user"));
 
-  const menuItems = [
-    { name: "Dashboard", path: "/dashboard" },
-    { name: "My Tasks", path: "/dashboard/tasks" },
-    { name: "Recruiters", path: "/dashboard/recruiters" },
-  ];
+const menuItems = [
+  { name: "Dashboard", path: "/manager" },
+  { name: "Create Skills", path: "/manager/manager-create-skills" },
+  { name: "Create Tasks", path: "/manager/manager-create-task" },
+  { name: "All Tasks", path: "/manager/manager-all-tasks" },
+  { name: "Workers", path: "/manager/manager-workers" },
+];
 
   const logoutHandler = () => {
     localStorage.removeItem("token");
@@ -32,7 +34,7 @@ function CandidateSidebar() {
           </h1>
 
           <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">
-            Candidate Workspace
+            Manager Control Panel
           </p>
 
         </div>
@@ -100,4 +102,4 @@ function CandidateSidebar() {
   );
 }
 
-export default CandidateSidebar;
+export default ManagerSidebar;
