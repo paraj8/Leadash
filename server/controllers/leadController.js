@@ -35,14 +35,14 @@ const getLeads = async (req, res) => {
         .populate("assignedTo", "name email role");
     }
 
-    // RECRUITER → sees only assigned leads
-    else if (req.user.role === "recruiter") {
+    // MANAGER → sees only assigned leads
+    else if (req.user.role === "manager") {
       leads = await Lead.find({ assignedTo: req.user.id })
         .populate("createdBy", "name email role")
         .populate("assignedTo", "name email role");
     }
 
-    // CANDIDATE → limited access
+    // WORKER → limited access
     else {
       leads = await Lead.find({ createdBy: req.user.id })
         .populate("createdBy", "name email role");
