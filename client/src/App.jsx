@@ -10,7 +10,7 @@ import ManagerLayout from "./layouts/ManagerLayout.jsx";
 import WorkerLayout from "./layouts/WorkerLayout.jsx";
 
 /* ADMIN PAGES */
-import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminDashboard from "./pages/admin/AdminDashboard.jsx";
 import AdminCreateSkills from "./pages/admin/AdminCreateSkills.jsx";
 import AdminCreateTask from "./pages/admin/AdminCreateTask.jsx";
 import AdminAllTasks from "./pages/admin/AdminAllTasks.jsx";
