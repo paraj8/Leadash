@@ -20,7 +20,7 @@ import AdminWorkers from "./pages/admin/AdminWorkers.jsx";
 /* MANAGER PAGES */
 import ManagerDashboard from "./pages/manager/ManagerDashboard";
 import ManagerAllTasks from "./pages/manager/ManagerAllTasks.jsx";
-import ManagerCreateTask from "./pages/manager/CreateTask.jsx";
+import ManagerCreateTask from "./pages/manager/ManagerCreateTask.jsx";
 import ManagerWorkers from "./pages/manager/ManagerWorkers.jsx";
 
 /* WORKER PAGES */
