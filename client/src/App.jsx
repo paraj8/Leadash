@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import About from "./pages/About";
 
 /* LAYOUTS */
 import AdminLayout from "./layouts/AdminLayout";
@@ -11,7 +12,7 @@ import WorkerLayout from "./layouts/WorkerLayout.jsx";
 
 /* ADMIN PAGES */
 import AdminDashboard from "./pages/admin/AdminDashboard.jsx";
-import AdminCreateSkills from "./pages/admin/AdminCreateSkills.jsx";
+import AdminRequirement from "./pages/admin/AdminRequirement.jsx";
 import AdminCreateTask from "./pages/admin/AdminCreateTask.jsx";
 import AdminAllTasks from "./pages/admin/AdminAllTasks.jsx";
 import AdminManagers from "./pages/admin/AdminManagers.jsx";
@@ -19,6 +20,7 @@ import AdminWorkers from "./pages/admin/AdminWorkers.jsx";
 
 /* MANAGER PAGES */
 import ManagerDashboard from "./pages/manager/ManagerDashboard";
+import ManagerRequirement from "./pages/manager/ManagerRequirement.jsx";
 import ManagerAllTasks from "./pages/manager/ManagerAllTasks.jsx";
 import ManagerCreateTask from "./pages/manager/ManagerCreateTask.jsx";
 import ManagerWorkers from "./pages/manager/ManagerWorkers.jsx";
@@ -37,12 +39,13 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/about" element={<About />} />
 
         {/* ================= ADMIN ================= */}
         <Route path="/admin" element={<AdminLayout />}>
 
           <Route index element={<AdminDashboard />} />
-          <Route path="/admin/admin-create-skills" element={<AdminCreateSkills />} />
+          <Route path="/admin/admin-requirement" element={<AdminRequirement />} />
           <Route path="/admin/admin-create-task" element={<AdminCreateTask />} />
           <Route path="/admin/admin-all-tasks" element={<AdminAllTasks />} />
           <Route path="/admin/admin-managers" element={<AdminManagers />} />
@@ -54,6 +57,7 @@ function App() {
         <Route path="/manager" element={<ManagerLayout />}>
 
           <Route index element={<ManagerDashboard />} />
+          <Route path="/manager/manager-requirement" element={<ManagerRequirement />} />
           <Route path="/manager/manager-create-tasks" element={<ManagerCreateTask />} />
           <Route path="/manager/manager-all-tasks" element={<ManagerAllTasks />} />
           <Route path="/manager/manager-workers" element={<ManagerWorkers />} />

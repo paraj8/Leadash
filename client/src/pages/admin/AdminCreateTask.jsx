@@ -8,7 +8,7 @@ function AdminCreateTask() {
     department: "",
     skill: "",
     note: "",
-    candidate: "",
+    worker: "",
   });
 
   const changeHandler = (e) => {
@@ -31,7 +31,7 @@ function AdminCreateTask() {
       department: "",
       skill: "",
       note: "",
-      candidate: "",
+      worker: "",
     });
   };
 
@@ -134,22 +134,22 @@ function AdminCreateTask() {
 
         </div>
 
-        {/* ASSIGN CANDIDATE Lard coded*/}
+        {/* ASSIGN WORKER Lard coded*/}
 
         <div className="mt-6">
 
           <label className="block mb-3 font-medium">
-            Assign Candidate
+            Assign Worker
           </label>
 
           <select
-            name="candidate"
-            value={formData.candidate}
+            name="worker"
+            value={formData.worker}
             onChange={changeHandler}
             className="w-full bg-slate-100 dark:bg-slate-900 border border-black/10 dark:border-white/10 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-cyan-500"
             required
           >
-            <option value="">Select Candidate</option>
+            <option value="">Select Worker</option>
             <option value="Paraj">Paraj</option>
             <option value="Rahul">Rahul</option>
           </select>
@@ -158,11 +158,11 @@ function AdminCreateTask() {
 
         
 
-       {/* ASSIGN CANDIDATES *
+       {/* ASSIGN WORKERS *
 <div className="mt-6">
 
   <label className="block mb-4 font-medium">
-    Assign Candidates
+    Assign Workers
   </label>
 
   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

@@ -7,7 +7,7 @@ function AdminSidebar() {
 
 const menuItems = [
   { name: "Dashboard", path: "/admin" },
-  { name: "Create Skills", path: "/admin/admin-create-skills" },
+  { name: "Requirement", path: "/admin/admin-requirement" },
   { name: "Create Tasks", path: "/admin/admin-create-task" },
   { name: "All Tasks", path: "/admin/admin-all-tasks" },
   { name: "Managers", path: "/admin/admin-managers" },

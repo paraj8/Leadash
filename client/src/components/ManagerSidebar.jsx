@@ -7,7 +7,7 @@ function ManagerSidebar() {
 
 const menuItems = [
   { name: "Dashboard", path: "/manager" },
-  { name: "Create Skills", path: "/manager/manager-create-skills" },
+  { name: "Requirement", path: "/manager/manager-requirement" },
   { name: "Create Tasks", path: "/manager/manager-create-task" },
   { name: "All Tasks", path: "/manager/manager-all-tasks" },
   { name: "Workers", path: "/manager/manager-workers" },

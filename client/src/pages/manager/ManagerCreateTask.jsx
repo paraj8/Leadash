@@ -2,14 +2,41 @@ import { useState } from "react";
 
 function ManagerCreateTask() {
 
+  const workers = [
+    {
+      id: 1,
+      name: "Paraj",
+      skill: "React",
+    },
+    {
+      id: 2,
+      name: "Rahul",
+      skill: "Node.js",
+    },
+    {
+      id: 3,
+      name: "Aman",
+      skill: "UI/UX",
+    },
+    {
+      id: 4,
+      name: "Rohit",
+      skill: "React",
+    },
+  ];
+
   const [formData, setFormData] = useState({
     title: "",
     company: "",
     department: "",
     skill: "",
     note: "",
-    candidate: "",
+    workers: [],
   });
+
+  const filteredWorkers = workers.filter(
+    (worker) => worker.skill === formData.skill
+  );
 
   const changeHandler = (e) => {
     setFormData({
@@ -31,7 +58,7 @@ function ManagerCreateTask() {
       department: "",
       skill: "",
       note: "",
-      candidate: "",
+      workers: [],
     });
   };
 
@@ -43,7 +70,7 @@ function ManagerCreateTask() {
       </h1>
 
       <p className="text-slate-500 dark:text-slate-400 mt-2">
-        Create and assign tasks to candidates
+        Create and assign tasks to workers
       </p>
 
       <form
@@ -134,104 +161,92 @@ function ManagerCreateTask() {
 
         </div>
 
-        {/* ASSIGN CANDIDATE Lard coded*/}
+        {/* ASSIGN WORKERS */}
+        <div className="mt-8">
 
-        <div className="mt-6">
-
-          <label className="block mb-3 font-medium">
-            Assign Candidate
+          <label className="block mb-4 font-medium">
+            Assign Workers
           </label>
 
-          <select
-            name="candidate"
-            value={formData.candidate}
-            onChange={changeHandler}
-            className="w-full bg-slate-100 dark:bg-slate-900 border border-black/10 dark:border-white/10 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-cyan-500"
-            required
-          >
-            <option value="">Select Candidate</option>
-            <option value="Paraj">Paraj</option>
-            <option value="Rahul">Rahul</option>
-          </select>
+          {formData.skill === "" ? (
+
+            <div className="bg-slate-100 dark:bg-slate-900 border border-black/10 dark:border-white/10 rounded-2xl px-5 py-4 text-slate-500 dark:text-slate-400">
+              Select a skill first to view workers
+            </div>
+
+          ) : (
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+              {filteredWorkers.length > 0 ? (
+
+                filteredWorkers.map((worker) => (
+
+                  <label
+                    key={worker.id}
+                    className="flex items-center gap-3 bg-slate-100 dark:bg-slate-900 border border-black/10 dark:border-white/10 rounded-2xl px-5 py-4 cursor-pointer hover:border-cyan-500 transition"
+                  >
+
+                    <input
+                      type="checkbox"
+                      value={worker.name}
+                      checked={formData.workers.includes(worker.name)}
+                      onChange={(e) => {
+
+                        if (e.target.checked) {
+
+                          setFormData({
+                            ...formData,
+                            workers: [
+                              ...formData.workers,
+                              worker.name,
+                            ],
+                          });
+
+                        } else {
+
+                          setFormData({
+                            ...formData,
+                            workers: formData.workers.filter(
+                              (w) => w !== worker.name
+                            ),
+                          });
+
+                        }
+
+                      }}
+                      className="w-5 h-5 accent-cyan-500"
+                    />
+
+                    <div>
+
+                      <p className="font-semibold">
+                        {worker.name}
+                      </p>
+
+                      <p className="text-sm text-slate-500 dark:text-slate-400">
+                        {worker.skill}
+                      </p>
+
+                    </div>
+
+                  </label>
+
+                ))
+
+              ) : (
+
+                <div className="bg-slate-100 dark:bg-slate-900 border border-black/10 dark:border-white/10 rounded-2xl px-5 py-4 text-slate-500 dark:text-slate-400">
+                  No workers found for selected skill
+                </div>
+
+              )}
+
+            </div>
+
+          )}
 
         </div>
-
-        
-
-       {/* ASSIGN CANDIDATES *
-<div className="mt-6">
-
-  <label className="block mb-4 font-medium">
-    Assign Candidates
-  </label>
-
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-
-     {filteredCandidates.map((candidate) => ( 
-
-      <label
-        key={candidate.id}
-        className="flex items-center gap-3 bg-slate-100 dark:bg-slate-900 border border-black/10 dark:border-white/10 rounded-2xl px-5 py-4 cursor-pointer hover:border-cyan-500 transition"
-      >
-
-        <input
-          type="checkbox"
-          value={candidate.name}
-          checked={formData.candidates.includes(candidate.name)}
-          onChange={(e) => {
-
-            if (e.target.checked) {
-
-              setFormData({
-                ...formData,
-                candidates: [
-                  ...formData.candidates,
-                  candidate.name,
-                ],
-              });
-
-            } else {
-
-              setFormData({
-                ...formData,
-                candidates: formData.candidates.filter(
-                  (c) => c !== candidate.name
-                ),
-              });
-
-            }
-
-          }}
-          className="w-5 h-5 accent-cyan-500"
-        />
-
-        <div>
-
-          <p className="font-semibold">
-            {candidate.name}
-          </p>
-
-          <p className="text-sm text-slate-500 dark:text-slate-400">
-            {candidate.skill}
-          </p>
-
-        </div>
-
-      </label>
-
-    ))}
-  </div>
-
-</div>
-
-
-
-
-*/}
-
-
-
-
 
         {/* NOTE */}
         <div className="mt-6">

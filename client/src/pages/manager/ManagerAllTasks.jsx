@@ -5,7 +5,7 @@ function ManagerAllTasks() {
     id: 1,
     title: "Build Landing Page",
     company: "EasyLife",
-    candidates: ["Paraj", "Rahul"],
+    workers: ["Paraj", "Rahul"],
     status: "Pending",
     date: "21 May 2026",
   },
@@ -13,7 +13,7 @@ function ManagerAllTasks() {
     id: 2,
     title: "Fix Dashboard UI",
     company: "TechNova",
-    candidates: ["Aman"],
+    workers: ["Aman"],
     status: "In Progress",
     date: "20 May 2026",
   },
@@ -21,7 +21,7 @@ function ManagerAllTasks() {
     id: 3,
     title: "Create API Integration",
     company: "Leadash",
-    candidates: ["Rahul", "Aman", "Paraj"],
+    workers: ["Rahul", "Aman", "Paraj"],
     status: "Completed",
     date: "18 May 2026",
   },
@@ -55,25 +55,25 @@ function ManagerAllTasks() {
               </th>
 
               <th className="p-5 font-semibold">
-                Candidate
+                Worker
               </th>
 
 
 
-{/* CANDIDATES from database
+{/* WORKERS from database
 
 
 <td className="p-5">
 
   <div className="flex flex-wrap gap-2">
 
-    {task.candidates.map((candidate) => (
+    {task.workers.map((worker) => (
 
       <span
-        key={candidate}
+        key={worker}
         className="px-3 py-1 rounded-full text-sm bg-slate-200 dark:bg-white/10"
       >
-        {candidate}
+        {worker}
       </span>
 
     ))}
@@ -111,11 +111,11 @@ function ManagerAllTasks() {
                 </td>
 
                 <td className="p-5">
-                  {task.company}
+                  {task.workers[0]}
                 </td>
 
                 <td className="p-5">
-                  {task.candidate}
+                  {task.workers.join(", ")}
                 </td>
 
                 <td className="p-5">
