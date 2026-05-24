@@ -1,5 +1,5 @@
 
-export default function About() {
+export default function Developer() {
   return (
     <div className="min-h-screen bg-[#0B1120] text-white">
       {/* HERO SECTION */}
@@ -40,9 +40,9 @@ export default function About() {
         <div className="flex-1 z-10 flex justify-center">
           <div className="w-[350px] h-[450px] rounded-[30px] overflow-hidden border border-slate-800 shadow-2xl">
             <img
-              src="/profile.jpg"
+              src="./src/assets/paraj.jpg"
               alt="Paraj Mandal"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover object-[90%]"
             />
           </div>
         </div>

@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import About from "./pages/About";
+import Developer from "./pages/Developer.jsx";
 
 /* LAYOUTS */
 import AdminLayout from "./layouts/AdminLayout";
@@ -39,7 +39,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/about" element={<About />} />
+        <Route path="/developer" element={<Developer />} />
 
         {/* ================= ADMIN ================= */}
         <Route path="/admin" element={<AdminLayout />}>

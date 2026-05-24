@@ -21,6 +21,9 @@ export default function HomePage() {
           <a href="#roles" className="hover:text-cyan-400 transition">
             Roles
           </a>
+            <a href="/developer" className="hover:text-cyan-400 transition">
+            Developer
+          </a>
         </div>
 
         <div className="flex gap-3">
