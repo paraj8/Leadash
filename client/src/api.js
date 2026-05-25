@@ -2,8 +2,8 @@
 import axios from "axios";
 
 const API = axios.create({
- //baseURL: "https://leadash.onrender.com/api",        // production
- baseURL: "http://localhost:5000/api"            //local
+ baseURL: "https://leadash.onrender.com/api",        // production
+ //baseURL: "http://localhost:5000/api"            //local
 });
 
 {/*
