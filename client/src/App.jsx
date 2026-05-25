@@ -58,7 +58,7 @@ function App() {
 
           <Route index element={<ManagerDashboard />} />
           <Route path="/manager/manager-requirement" element={<ManagerRequirement />} />
-          <Route path="/manager/manager-create-tasks" element={<ManagerCreateTask />} />
+          <Route path="/manager/manager-create-task" element={<ManagerCreateTask />} />
           <Route path="/manager/manager-all-tasks" element={<ManagerAllTasks />} />
           <Route path="/manager/manager-workers" element={<ManagerWorkers />} />
 

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import API from "../../api";
 import { toast } from "react-toastify";
 
@@ -8,6 +8,9 @@ function ManagerCreateTask() {
   const [skills, setSkills] = useState([]);
   const [workers, setWorkers] = useState([]);
 
+  const [openWorkerBox, setOpenWorkerBox] = useState(false);
+  const wrapperRef = useRef(null);
+
   const [formData, setFormData] = useState({
     title: "",
     company: "",
@@ -16,6 +19,27 @@ function ManagerCreateTask() {
     note: "",
     workers: [],
   });
+
+
+  /* ================= CLOSE WORKER DROPDOWN ON OUTSIDE CLICK ================= */
+
+useEffect(() => {
+  const handleClickOutside = (event) => {
+    if (
+      wrapperRef.current &&
+      !wrapperRef.current.contains(event.target)
+    ) {
+      setOpenWorkerBox(false);
+    }
+  };
+
+  document.addEventListener("mousedown", handleClickOutside);
+
+  return () => {
+    document.removeEventListener("mousedown", handleClickOutside);
+  };
+}, []);
+
 
   /* ================= FETCH DATA ================= */
 
@@ -32,7 +56,7 @@ useEffect(() => {
       ] = await Promise.all([
         API.get("/requirements/companies"),
         API.get("/requirements/skills"),
-        API.get("/worker-profile"),
+        API.get("/worker-profile/all"),
       ]);
 
       setCompanies(companyRes.data);
@@ -79,32 +103,6 @@ useEffect(() => {
 
   };
 
-  /* ================= WORKER SELECT ================= */
-
-  const workerHandler = (workerId) => {
-
-    if (formData.workers.includes(workerId)) {
-
-      setFormData({
-        ...formData,
-        workers: formData.workers.filter(
-          (id) => id !== workerId
-        ),
-      });
-
-    } else {
-
-      setFormData({
-        ...formData,
-        workers: [
-          ...formData.workers,
-          workerId,
-        ],
-      });
-
-    }
-
-  };
 
   /* ================= SUBMIT ================= */
 
@@ -150,7 +148,7 @@ const submitHandler = async (e) => {
 
       <form
         onSubmit={submitHandler}
-        className="mt-10 bg-white dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-3xl p-8"
+        className="mt-8 bg-white dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-3xl p-8"
       >
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -168,7 +166,7 @@ const submitHandler = async (e) => {
               placeholder="Enter task title"
               value={formData.title}
               onChange={changeHandler}
-              className="w-full bg-slate-100 dark:bg-slate-900 border border-black/10 dark:border-white/10 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-cyan-500"
+              className="w-full bg-slate-100 dark:bg-slate-900 border border-black/10 dark:border-white/10 rounded-2xl px-5 py-2 outline-none focus:ring-2 focus:ring-cyan-500"
               required
             />
 
@@ -185,7 +183,7 @@ const submitHandler = async (e) => {
               name="company"
               value={formData.company}
               onChange={changeHandler}
-              className="w-full bg-slate-100 dark:bg-slate-900 border border-black/10 dark:border-white/10 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-cyan-500"
+              className="w-full bg-slate-100 dark:bg-slate-900 border border-black/10 dark:border-white/10 rounded-2xl px-5 py-2 outline-none focus:ring-2 focus:ring-cyan-500"
               required
             >
 
@@ -221,7 +219,7 @@ const submitHandler = async (e) => {
               placeholder="Enter department"
               value={formData.department}
               onChange={changeHandler}
-              className="w-full bg-slate-100 dark:bg-slate-900 border border-black/10 dark:border-white/10 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-cyan-500"
+              className="w-full bg-slate-100 dark:bg-slate-900 border border-black/10 dark:border-white/10 rounded-2xl px-5 py-2 outline-none focus:ring-2 focus:ring-cyan-500"
               required
             />
 
@@ -238,7 +236,7 @@ const submitHandler = async (e) => {
               name="skill"
               value={formData.skill}
               onChange={changeHandler}
-              className="w-full bg-slate-100 dark:bg-slate-900 border border-black/10 dark:border-white/10 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-cyan-500"
+              className="w-full bg-slate-100 dark:bg-slate-900 border border-black/10 dark:border-white/10 rounded-2xl px-5 py-2 outline-none focus:ring-2 focus:ring-cyan-500"
               required
             >
 
@@ -263,73 +261,71 @@ const submitHandler = async (e) => {
 
         </div>
 
-        {/* ASSIGN WORKERS */}
-        <div className="mt-8">
+{/* ASSIGN WORKERS */}
+<div className="mt-5" ref={wrapperRef}>
 
-          <label className="block mb-4 font-medium">
-            Assign Workers
-          </label>
+  <label className="block mb-4 font-medium">
+    Assign Workers
+  </label>
 
-          {formData.skill === "" ? (
+  {/* INPUT BOX */}
+  <div
+    onClick={() => setOpenWorkerBox(true)}
+    className="w-full bg-slate-100 dark:bg-slate-900 border border-black/10 dark:border-white/10 rounded-2xl px-5 py-2 cursor-pointer"
+  >
+    {formData.workers.length === 0
+      ? "Click to select workers"
+      : `${formData.workers.length} worker(s) selected`}
+  </div>
 
-            <div className="bg-slate-100 dark:bg-slate-900 border border-black/10 dark:border-white/10 rounded-2xl px-5 py-4 text-slate-500 dark:text-slate-400">
-              Select a skill first to view workers
+  {/* DROPDOWN PANEL */}
+  {openWorkerBox && (
+    <div className="mt-3 bg-white dark:bg-slate-900 border border-black/10 dark:border-white/10 rounded-2xl p-4 shadow-xl max-h-72 overflow-y-auto">
+
+      {filteredWorkers.length === 0 ? (
+        <p className="text-slate-500">No workers found</p>
+      ) : (
+        filteredWorkers.map((worker) => (
+          <div
+            key={worker._id}
+            onClick={() => {
+              setFormData((prev) => {
+                const exists = prev.workers.includes(worker._id);
+
+                return {
+                  ...prev,
+                  workers: exists
+                    ? prev.workers.filter((id) => id !== worker._id)
+                    : [...prev.workers, worker._id],
+                };
+              });
+            }}
+            className={`flex justify-between items-center px-4 py-3 rounded-xl cursor-pointer mb-2 transition ${
+              formData.workers.includes(worker._id)
+                ? "bg-cyan-500/20 border border-cyan-500"
+                : "hover:bg-slate-100 dark:hover:bg-white/5"
+            }`}
+          >
+            <div>
+              <p className="font-semibold">{worker.name}</p>
+              <p className="text-sm text-slate-500">
+                {worker.skills.join(", ")}
+              </p>
             </div>
 
-          ) : (
+            {formData.workers.includes(worker._id) && (
+              <span className="text-cyan-500 font-bold">✓</span>
+            )}
+          </div>
+        ))
+      )}
+    </div>
+  )}
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-
-              {filteredWorkers.length > 0 ? (
-
-                filteredWorkers.map((worker) => (
-
-                  <label
-                    key={worker._id}
-                    className="flex items-center gap-3 bg-slate-100 dark:bg-slate-900 border border-black/10 dark:border-white/10 rounded-2xl px-5 py-4 cursor-pointer hover:border-cyan-500 transition"
-                  >
-
-                    <input
-                      type="checkbox"
-                      checked={formData.workers.includes(worker._id)}
-                      onChange={() =>
-                        workerHandler(worker._id)
-                      }
-                      className="w-5 h-5 accent-cyan-500"
-                    />
-
-                    <div>
-
-                      <p className="font-semibold">
-                        {worker.name}
-                      </p>
-
-                      <p className="text-sm text-slate-500 dark:text-slate-400">
-                        {worker.skills.join(", ")}
-                      </p>
-
-                    </div>
-
-                  </label>
-
-                ))
-
-              ) : (
-
-                <div className="bg-slate-100 dark:bg-slate-900 border border-black/10 dark:border-white/10 rounded-2xl px-5 py-4 text-slate-500 dark:text-slate-400">
-                  No workers found for selected skill
-                </div>
-
-              )}
-
-            </div>
-
-          )}
-
-        </div>
+</div>
 
         {/* NOTE */}
-        <div className="mt-6">
+        <div className="mt-4">
 
           <label className="block mb-3 font-medium">
             Note

@@ -23,7 +23,7 @@ router.post(
 router.get(
   "/",
   protect,
-  roleCheck("worker"),
+  roleCheck("worker","manager","admin"),
   getWorkerProfile
 );
 
