@@ -1,34 +1,39 @@
+import { useEffect, useState } from "react";
+import API from "../../api";
+import { toast } from "react-toastify";
+
 function ManagerWorkers() {
 
-  const workers = [
-    {
-      id: 1,
-      name: "Paraj Mandal",
-      email: "paraj@gmail.com",
-      mobile: "9876543210",
-      skills: ["React", "Node.js", "UI/UX"],
-      experience: "2 Years",
-      bio: "Frontend developer with experience in modern web applications and dashboard systems.",
-    },
-    {
-      id: 2,
-      name: "Rahul Kumar",
-      email: "rahul@gmail.com",
-      mobile: "9123456780",
-      skills: ["MongoDB", "Express", "Backend"],
-      experience: "1 Year",
-      bio: "Backend developer focused on APIs, authentication and database architecture.",
-    },
-    {
-      id: 3,
-      name: "Aman Verma",
-      email: "aman@gmail.com",
-      mobile: "9988776655",
-      skills: ["React", "Tailwind", "Figma"],
-      experience: "3 Years",
-      bio: "Creative UI developer with strong design and frontend implementation skills.",
-    },
-  ];
+  const [workers, setWorkers] = useState([]);
+
+  /* ================= FETCH WORKERS ================= */
+
+useEffect(() => {
+
+  const fetchData = async () => {
+
+    try {
+
+      const res = await API.get("/worker-profile/all");
+
+      setWorkers(res.data);
+
+    } catch (err) {
+
+      toast.error(
+        err.response?.data?.message ||
+        "Failed to load workers"
+      );
+
+    }
+
+  };
+
+  fetchData();
+
+}, []);
+
+
 
   return (
     <div>
@@ -46,7 +51,7 @@ function ManagerWorkers() {
         {workers.map((worker) => (
 
           <div
-            key={worker.id}
+            key={worker._id}
             className="bg-white dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-3xl p-6"
           >
 
@@ -106,10 +111,10 @@ function ManagerWorkers() {
 
               <div className="flex flex-wrap gap-2">
 
-                {worker.skills.map((skill) => (
+                {worker.skills.map((skill, index) => (
 
                   <span
-                    key={skill}
+                    key={index}
                     className="px-3 py-1 rounded-full text-sm bg-slate-100 dark:bg-white/10"
                   >
                     {skill}

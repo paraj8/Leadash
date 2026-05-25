@@ -1,6 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import API from "../../api";
+import { toast } from "react-toastify";
 
 function WorkerProfile() {
+
+  const [skillsList, setSkillsList] = useState([]);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -11,49 +15,69 @@ function WorkerProfile() {
     skills: [],
   });
 
-  const skillsList = [
-    "React",
-    "Node.js",
-    "MongoDB",
-    "Express",
-    "UI/UX",
-    "Tailwind",
-  ];
+  /* ================= FETCH SKILLS ================= */
+
+  useEffect(() => {
+
+    const fetchSkills = async () => {
+
+      try {
+
+        const res = await API.get("/requirements/skills");
+
+        setSkillsList(res.data);
+
+      } catch (err) {
+
+        toast.error(
+          err.response?.data?.message || "Failed to load skills"
+        );
+
+      }
+
+    };
+
+    fetchSkills();
+
+  }, []);
+
+  /* ================= INPUT CHANGE ================= */
 
   const changeHandler = (e) => {
+
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
-  };
-
-  const skillHandler = (skill) => {
-
-    if (formData.skills.includes(skill)) {
-
-      setFormData({
-        ...formData,
-        skills: formData.skills.filter(
-          (item) => item !== skill
-        ),
-      });
-
-    } else {
-
-      setFormData({
-        ...formData,
-        skills: [...formData.skills, skill],
-      });
-
-    }
 
   };
 
-  const submitHandler = (e) => {
-    e.preventDefault();
 
-    console.log(formData);
-  };
+  /* ================= SUBMIT ================= */
+
+const submitHandler = async (e) => {
+
+  e.preventDefault();
+
+  try {
+
+    const res = await API.post(
+      "/worker-profile",
+      formData
+    );
+
+    toast.success(res.data.message);
+
+  } catch (err) {
+
+    toast.error(
+      err.response?.data?.message ||
+      "Failed to save profile"
+    );
+
+  }
+
+};
 
   return (
     <div>
@@ -151,40 +175,89 @@ function WorkerProfile() {
 
         </div>
 
-        {/* SKILLS */}
-        <div className="mt-8">
+       {/* SKILLS */}
+<div className="mt-8">
 
-          <label className="block mb-4 font-medium">
-            Skills
-          </label>
+  <label className="block mb-3 font-medium">
+    Skills
+  </label>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+  {/* SELECT DROPDOWN */}
+  <select
+    onChange={(e) => {
+      const selectedSkill = e.target.value;
 
-            {skillsList.map((skill) => (
+      if (
+        selectedSkill &&
+        !formData.skills.includes(selectedSkill)
+      ) {
+        setFormData({
+          ...formData,
+          skills: [
+            ...formData.skills,
+            selectedSkill,
+          ],
+        });
+      }
 
-              <label
-                key={skill}
-                className="flex items-center gap-3 bg-slate-100 dark:bg-slate-900 border border-black/10 dark:border-white/10 rounded-2xl px-5 py-4 cursor-pointer hover:border-cyan-500 transition"
-              >
+      e.target.value = "";
+    }}
+    className="w-full bg-slate-100 dark:bg-slate-900 border border-black/10 dark:border-white/10 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-cyan-500"
+  >
 
-                <input
-                  type="checkbox"
-                  checked={formData.skills.includes(skill)}
-                  onChange={() => skillHandler(skill)}
-                  className="w-5 h-5 accent-cyan-500"
-                />
+    <option value="">
+      Select Skill
+    </option>
 
-                <span>
-                  {skill}
-                </span>
+    {skillsList.map((skill) => (
 
-              </label>
+      <option
+        key={skill._id}
+        value={skill.name}
+      >
+        {skill.name}
+      </option>
 
-            ))}
+    ))}
 
-          </div>
+  </select>
 
-        </div>
+  {/* SELECTED SKILLS */}
+  <div className="flex flex-wrap gap-3 mt-5">
+
+    {formData.skills.map((skill, index) => (
+
+      <div
+        key={index}
+        className="flex items-center gap-3 bg-cyan-500/10 border border-cyan-500/20 px-4 py-2 rounded-2xl"
+      >
+
+        <span>
+          {skill}
+        </span>
+
+        <button
+          type="button"
+          onClick={() =>
+            setFormData({
+              ...formData,
+              skills: formData.skills.filter(
+                (item) => item !== skill
+              ),
+            })
+          }
+          className="text-red-500 font-bold"
+        >
+          ×
+        </button>
+
+      </div>
+
+    ))}
+
+  </div>
+
+</div>
 
         {/* BIO */}
         <div className="mt-8">

@@ -6,6 +6,7 @@ const connectDB = require("./config/db");
 
 const authRoutes = require("./routes/authRoutes");
 const requirementRoutes = require("./routes/requirementRoutes");
+const workerProfileRoutes = require("./routes/workerProfileRoutes");
 
 const app = express();
 
@@ -24,7 +25,7 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 
 app.use("/api/requirements", requirementRoutes);
-
+app.use("/api/worker-profile", workerProfileRoutes);
 /* ================= TEST ROUTE ================= */
 
 app.get("/", (req, res) => {
