@@ -1,29 +1,66 @@
 const Task = require("../models/Task");
 
-const getDashboardStats = async (req, res) => {
+/* ================= CREATE TASK ================= */
+
+const createTask = async (req, res) => {
 
   try {
 
-    const totalTasks = await Task.countDocuments();
+    const {
+      title,
+      company,
+      department,
+      skill,
+      note,
+      workers,
+    } = req.body;
 
-    const pending = await Task.countDocuments({
-      status: "Pending",
+    if (
+      !title ||
+      !company ||
+      !department ||
+      !skill
+    ) {
+      return res.status(400).json({
+        message: "All required fields must be filled",
+      });
+    }
+
+    const task = await Task.create({
+      title,
+      company,
+      department,
+      skill,
+      note,
+      workers,
+      createdBy: req.user.id,
     });
 
-    const inProgress = await Task.countDocuments({
-      status: "In Progress",
+    res.status(201).json(task);
+
+  } catch (error) {
+
+    res.status(500).json({
+      message: error.message,
     });
 
-    const completed = await Task.countDocuments({
-      status: "Completed",
-    });
+  }
 
-    res.json({
-      totalTasks,
-      pending,
-      inProgress,
-      completed,
-    });
+};
+
+/* ================= GET TASKS ================= */
+
+const getTasks = async (req, res) => {
+
+  try {
+
+    const tasks = await Task.find()
+      .populate("workers")
+      .sort({
+        createdAt: -1,
+      });
+
+    res.json(tasks);
 
   } catch (error) {
 
@@ -36,5 +73,6 @@ const getDashboardStats = async (req, res) => {
 };
 
 module.exports = {
-  getDashboardStats,
+  createTask,
+  getTasks,
 };

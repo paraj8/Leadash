@@ -108,15 +108,34 @@ useEffect(() => {
 
   /* ================= SUBMIT ================= */
 
-  const submitHandler = async (e) => {
+const submitHandler = async (e) => {
 
-    e.preventDefault();
+  e.preventDefault();
 
-    console.log(formData);
+  try {
 
-    toast.success("Task ready for backend");
+    await API.post("/tasks", formData);
 
-  };
+    toast.success("Task created successfully");
+
+    setFormData({
+      title: "",
+      company: "",
+      department: "",
+      skill: "",
+      note: "",
+      workers: [],
+    });
+
+  } catch (err) {
+
+    toast.error(
+      err.response?.data?.message || "Failed to create task"
+    );
+
+  }
+
+};
 
   return (
     <div>
