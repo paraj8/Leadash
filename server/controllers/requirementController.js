@@ -1,5 +1,5 @@
-const Company = require("../models/Company");
-const Skill = require("../models/Skill");
+const Company = require("../models/ompany");
+const Skill = require("../models/kill");
 
 /* ================= ADD COMPANY ================= */
 
