@@ -1,29 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import API from "../../api";
+import { toast } from "react-toastify";
 
 function ManagerCreateTask() {
 
-  const workers = [
-    {
-      id: 1,
-      name: "Paraj",
-      skill: "React",
-    },
-    {
-      id: 2,
-      name: "Rahul",
-      skill: "Node.js",
-    },
-    {
-      id: 3,
-      name: "Aman",
-      skill: "UI/UX",
-    },
-    {
-      id: 4,
-      name: "Rohit",
-      skill: "React",
-    },
-  ];
+  const [companies, setCompanies] = useState([]);
+  const [skills, setSkills] = useState([]);
+  const [workers, setWorkers] = useState([]);
 
   const [formData, setFormData] = useState({
     title: "",
@@ -34,32 +17,105 @@ function ManagerCreateTask() {
     workers: [],
   });
 
-  const filteredWorkers = workers.filter(
-    (worker) => worker.skill === formData.skill
-  );
+  /* ================= FETCH DATA ================= */
 
-  const changeHandler = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+useEffect(() => {
+
+  const loadData = async () => {
+
+    try {
+
+      const [
+        companyRes,
+        skillRes,
+        workerRes,
+      ] = await Promise.all([
+        API.get("/requirements/companies"),
+        API.get("/requirements/skills"),
+        API.get("/worker-profile"),
+      ]);
+
+      setCompanies(companyRes.data);
+
+      setSkills(skillRes.data);
+
+      setWorkers(workerRes.data);
+
+    } catch (err) {
+
+      toast.error(
+        err.response?.data?.message || "Failed to load data"
+      );
+
+    }
+
   };
 
-  const submitHandler = (e) => {
+  loadData();
+
+}, []);
+
+  /* ================= FILTER WORKERS ================= */
+
+  const filteredWorkers = workers.filter((worker) =>
+    worker.skills.includes(formData.skill)
+  );
+
+  /* ================= CHANGE HANDLER ================= */
+
+  const changeHandler = (e) => {
+
+    const { name, value } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+
+      // clear selected workers when skill changes
+      ...(name === "skill" && {
+        workers: [],
+      }),
+    }));
+
+  };
+
+  /* ================= WORKER SELECT ================= */
+
+  const workerHandler = (workerId) => {
+
+    if (formData.workers.includes(workerId)) {
+
+      setFormData({
+        ...formData,
+        workers: formData.workers.filter(
+          (id) => id !== workerId
+        ),
+      });
+
+    } else {
+
+      setFormData({
+        ...formData,
+        workers: [
+          ...formData.workers,
+          workerId,
+        ],
+      });
+
+    }
+
+  };
+
+  /* ================= SUBMIT ================= */
+
+  const submitHandler = async (e) => {
+
     e.preventDefault();
 
     console.log(formData);
 
-    // backend later
+    toast.success("Task ready for backend");
 
-    setFormData({
-      title: "",
-      company: "",
-      department: "",
-      skill: "",
-      note: "",
-      workers: [],
-    });
   };
 
   return (
@@ -106,15 +162,30 @@ function ManagerCreateTask() {
               Company
             </label>
 
-            <input
-              type="text"
+            <select
               name="company"
-              placeholder="Enter company name"
               value={formData.company}
               onChange={changeHandler}
               className="w-full bg-slate-100 dark:bg-slate-900 border border-black/10 dark:border-white/10 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-cyan-500"
               required
-            />
+            >
+
+              <option value="">
+                Select Company
+              </option>
+
+              {companies.map((company) => (
+
+                <option
+                  key={company._id}
+                  value={company.name}
+                >
+                  {company.name}
+                </option>
+
+              ))}
+
+            </select>
 
           </div>
 
@@ -151,10 +222,22 @@ function ManagerCreateTask() {
               className="w-full bg-slate-100 dark:bg-slate-900 border border-black/10 dark:border-white/10 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-cyan-500"
               required
             >
-              <option value="">Select Skill</option>
-              <option value="React">React</option>
-              <option value="Node.js">Node.js</option>
-              <option value="UI/UX">UI/UX</option>
+
+              <option value="">
+                Select Skill
+              </option>
+
+              {skills.map((skill) => (
+
+                <option
+                  key={skill._id}
+                  value={skill.name}
+                >
+                  {skill.name}
+                </option>
+
+              ))}
+
             </select>
 
           </div>
@@ -183,38 +266,16 @@ function ManagerCreateTask() {
                 filteredWorkers.map((worker) => (
 
                   <label
-                    key={worker.id}
+                    key={worker._id}
                     className="flex items-center gap-3 bg-slate-100 dark:bg-slate-900 border border-black/10 dark:border-white/10 rounded-2xl px-5 py-4 cursor-pointer hover:border-cyan-500 transition"
                   >
 
                     <input
                       type="checkbox"
-                      value={worker.name}
-                      checked={formData.workers.includes(worker.name)}
-                      onChange={(e) => {
-
-                        if (e.target.checked) {
-
-                          setFormData({
-                            ...formData,
-                            workers: [
-                              ...formData.workers,
-                              worker.name,
-                            ],
-                          });
-
-                        } else {
-
-                          setFormData({
-                            ...formData,
-                            workers: formData.workers.filter(
-                              (w) => w !== worker.name
-                            ),
-                          });
-
-                        }
-
-                      }}
+                      checked={formData.workers.includes(worker._id)}
+                      onChange={() =>
+                        workerHandler(worker._id)
+                      }
                       className="w-5 h-5 accent-cyan-500"
                     />
 
@@ -225,7 +286,7 @@ function ManagerCreateTask() {
                       </p>
 
                       <p className="text-sm text-slate-500 dark:text-slate-400">
-                        {worker.skill}
+                        {worker.skills.join(", ")}
                       </p>
 
                     </div>
