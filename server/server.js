@@ -8,6 +8,7 @@ const authRoutes = require("./routes/authRoutes");
 const requirementRoutes = require("./routes/requirementRoutes");
 const workerProfileRoutes = require("./routes/workerProfileRoutes");
 const taskRoutes = require("./routes/taskRoutes");
+const userRoutes = require("./routes/userRoutes");
 
 const app = express();
 
@@ -28,6 +29,8 @@ app.use("/api/auth", authRoutes);
 app.use("/api/requirements", requirementRoutes);
 app.use("/api/worker-profile", workerProfileRoutes);
 app.use("/api/tasks", taskRoutes);
+app.use("/api/users", userRoutes);
+
 /* ================= TEST ROUTE ================= */
 
 app.get("/", (req, res) => {

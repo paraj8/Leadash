@@ -1,25 +1,39 @@
+import { useEffect, useState } from "react";
+
+import API from "../../api";
+
+import { toast } from "react-toastify";
+
 function AdminManagers() {
 
-  const managers = [
-    {
-      id: 1,
-      name: "Rohit Sharma",
-      email: "rohit@gmail.com",
-      tasks: 12,
-    },
-    {
-      id: 2,
-      name: "Priya Singh",
-      email: "priya@gmail.com",
-      tasks: 8,
-    },
-    {
-      id: 3,
-      name: "Aman Verma",
-      email: "aman@gmail.com",
-      tasks: 15,
-    },
-  ];
+  const [managers, setManagers] = useState([]);
+
+  useEffect(() => {
+
+    const fetchManagers = async () => {
+
+      try {
+
+        const res = await API.get(
+          "/users/managers"
+        );
+
+        setManagers(res.data);
+
+      } catch (err) {
+
+        toast.error(
+          err.response?.data?.message ||
+          "Failed to load managers"
+        );
+
+      }
+
+    };
+
+    fetchManagers();
+
+  }, []);
 
   return (
     <div>
@@ -37,8 +51,15 @@ function AdminManagers() {
         {managers.map((manager) => (
 
           <div
-            key={manager.id}
-            className="bg-white dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-3xl p-6"
+            key={manager._id}
+            className="
+              bg-white
+              dark:bg-white/5
+              border border-black/10
+              dark:border-white/10
+              rounded-3xl
+              p-6
+            "
           >
 
             <div className="flex items-start justify-between">
@@ -55,7 +76,15 @@ function AdminManagers() {
 
               </div>
 
-              <span className="px-3 py-1 rounded-full text-sm bg-cyan-500/10 text-cyan-600 dark:text-cyan-300 font-medium">
+              <span
+                className="
+                  px-3 py-1 rounded-full text-sm
+                  bg-cyan-500/10
+                  text-cyan-600
+                  dark:text-cyan-300
+                  font-medium
+                "
+              >
                 Manager
               </span>
 

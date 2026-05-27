@@ -34,18 +34,47 @@ const taskSchema = new mongoose.Schema(
     workers: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "WorkerProfile",
+        ref: "User",
       },
     ],
 
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
+      required: true,
     },
+
+    status: {
+      type: String,
+      enum: [
+        "Pending",
+        "In Progress",
+        "Completed",
+      ],
+      default: "Pending",
+    },
+
+    priority: {
+      type: String,
+      enum: [
+        "Low",
+        "Medium",
+        "High",
+      ],
+      default: "Medium",
+    },
+
+    deadline: {
+      type: Date,
+    },
+
   },
   {
     timestamps: true,
   }
 );
 
-module.exports = mongoose.model("Task", taskSchema);
+module.exports = mongoose.model(
+  "Task",
+  taskSchema
+);

@@ -11,7 +11,12 @@ const protect = (req, res, next) => {
     token = token.split(" ")[1];
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded;
+
+    // 🔥 FIX: normalize user object
+    req.user = {
+      id: decoded.id || decoded._id || decoded.userId,
+      role: decoded.role,
+    };
 
     next();
   } catch (error) {
