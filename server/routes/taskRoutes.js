@@ -2,6 +2,10 @@ const express = require("express");
 
 const router = express.Router();
 
+const protect = require("../middleware/authMiddleware");
+
+const roleCheck = require("../middleware/roleMiddleware");
+
 const {
   createTask,
   getTasks,
@@ -10,8 +14,8 @@ const {
   getDashboardStats,
 } = require("../controllers/taskController");
 
-const protect = require("../middleware/authMiddleware");
-const roleCheck = require("../middleware/roleMiddleware");
+
+
 
 /* ================= DASHBOARD ================= */
 
@@ -27,7 +31,7 @@ router.get(
 router.post(
   "/",
   protect,
-  roleCheck("admin", "manager"),
+  roleCheck("worker", "admin", "manager"),
   createTask
 );
 
@@ -40,7 +44,7 @@ router.get(
 router.put(
   "/:id",
   protect,
-  roleCheck("admin", "manager"),
+  roleCheck("worker", "admin", "manager"),
   updateTask
 );
 

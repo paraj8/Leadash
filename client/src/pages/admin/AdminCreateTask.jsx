@@ -65,6 +65,8 @@ useEffect(() => {
 
       setWorkers(workerRes.data);
 
+  
+
     } catch (err) {
 
       toast.error(
@@ -290,18 +292,18 @@ const submitHandler = async (e) => {
             key={worker._id}
             onClick={() => {
               setFormData((prev) => {
-                const exists = prev.workers.includes(worker._id);
+                const exists = prev.workers.includes(worker._user);
 
                 return {
                   ...prev,
                   workers: exists
-                    ? prev.workers.filter((id) => id !== worker._id)
-                    : [...prev.workers, worker._id],
+                    ? prev.workers.filter((id) => id !== worker.user)
+                    : [...prev.workers, worker.user],
                 };
               });
             }}
             className={`flex justify-between items-center px-4 py-3 rounded-xl cursor-pointer mb-2 transition ${
-              formData.workers.includes(worker._id)
+              formData.workers.includes(worker._user)
                 ? "bg-cyan-500/20 border border-cyan-500"
                 : "hover:bg-slate-100 dark:hover:bg-white/5"
             }`}
@@ -313,7 +315,7 @@ const submitHandler = async (e) => {
               </p>
             </div>
 
-            {formData.workers.includes(worker._id) && (
+            {formData.workers.includes(worker._user) && (
               <span className="text-cyan-500 font-bold">✓</span>
             )}
           </div>

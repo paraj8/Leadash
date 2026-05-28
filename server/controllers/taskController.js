@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const Task = require("../models/Task");
 
 /* ================= CREATE TASK ================= */
@@ -14,10 +15,6 @@ const createTask = async (req, res) => {
       note,
       workers,
     } = req.body;
-
-    
-console.log("DECODED TOKEN:", decoded);
-console.log("REQ USER:", req.user);
 
     if (
       !title ||
@@ -45,6 +42,8 @@ console.log("REQ USER:", req.user);
     res.status(201).json(task);
 
   } catch (error) {
+
+    console.log(error);
 
     res.status(500).json({
       message: error.message,
@@ -80,6 +79,8 @@ const getTaskById = async (req, res) => {
     res.status(200).json(task);
 
   } catch (error) {
+
+    console.log(error);
 
     res.status(500).json({
       message: error.message,
@@ -118,9 +119,11 @@ const getTasks = async (req, res) => {
 
       .sort({ createdAt: -1 });
 
-    res.json(tasks);
+    res.status(200).json(tasks);
 
   } catch (error) {
+
+    console.log(error);
 
     res.status(500).json({
       message: error.message,
@@ -156,7 +159,7 @@ const getDashboardStats = async (req, res) => {
         status: "Completed",
       });
 
-    /* ===== YOUR TASKS ===== */
+    /* ===== YOUR CREATED TASKS ===== */
 
     const yourTotalTasks =
       await Task.countDocuments({
@@ -181,7 +184,7 @@ const getDashboardStats = async (req, res) => {
         status: "Completed",
       });
 
-    /* ================= ASSIGNED TASKS ================= */
+    /* ===== ASSIGNED TASKS ===== */
 
     const assignedTotalTasks =
       await Task.countDocuments({
@@ -233,6 +236,8 @@ const getDashboardStats = async (req, res) => {
 
   } catch (err) {
 
+    console.log(err);
+
     res.status(500).json({
       message: "Failed to fetch dashboard stats",
     });
@@ -259,24 +264,14 @@ const updateTask = async (req, res) => {
 
     /* ================= ACCESS CONTROL ================= */
 
-    /* MANAGER/ADMIN WHO CREATED TASK */
-
     const isCreator =
       task.createdBy.toString() === req.user.id;
-
-    /* WORKER ASSIGNED TO TASK */
-
-    const tasks = await Task.find({});
-console.log(tasks);
 
     const isAssignedWorker =
       task.workers.some(
         (worker) =>
           worker.toString() === req.user.id
-        
       );
-
-    /* DENY IF NO ACCESS */
 
     if (!isCreator && !isAssignedWorker) {
 
@@ -286,7 +281,7 @@ console.log(tasks);
 
     }
 
-    /* WORKERS CAN ONLY CHANGE STATUS */
+    /* ================= WORKER ================= */
 
     if (isAssignedWorker && !isCreator) {
 
@@ -295,7 +290,7 @@ console.log(tasks);
 
     }
 
-    /* CREATOR CAN CHANGE EVERYTHING */
+    /* ================= CREATOR ================= */
 
     else {
 
@@ -312,9 +307,11 @@ console.log(tasks);
 
     const updatedTask = await task.save();
 
-    res.json(updatedTask);
+    res.status(200).json(updatedTask);
 
   } catch (error) {
+
+    console.log(error);
 
     res.status(500).json({
       message: "Failed to update task",
@@ -323,7 +320,6 @@ console.log(tasks);
   }
 
 };
-
 
 module.exports = {
   createTask,
