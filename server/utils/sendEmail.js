@@ -14,11 +14,6 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-console.log("HOST:", process.env.EMAIL_HOST);
-console.log("PORT:", process.env.EMAIL_PORT);
-console.log("USER:", process.env.EMAIL_USER);
-console.log("PASS EXISTS:", !!process.env.EMAIL_PASS);
-
 transporter.verify((error) => {
   if (error) {
     console.log("SMTP ERROR:", error);
