@@ -23,19 +23,23 @@ function Register() {
     try {
       await API.post("/auth/register", form);
 
-      toast.success("Account created successfully!");
+      toast.success("OTP sent to your email!");
 
-      navigate("/login");
+      navigate("/otp-verification", {
+        state: {
+          email: form.email,
+        },
+      });
     } catch (err) {
-      toast.error(err.response?.data?.message || "Registration failed");
+      toast.error(
+        err.response?.data?.message || "Registration failed"
+      );
     }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-950 to-slate-900 text-white">
-
       <div className="w-full max-w-md p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-xl">
-
         <h1 className="text-3xl font-black text-center mb-2">
           Create Account
         </h1>
@@ -45,21 +49,23 @@ function Register() {
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-
           <input
             name="name"
             placeholder="Full Name"
             value={form.name}
             onChange={handleChange}
             className="w-full p-3 rounded-xl bg-black/30 border border-white/10"
+            required
           />
 
           <input
             name="email"
+            type="email"
             placeholder="Email"
             value={form.email}
             onChange={handleChange}
             className="w-full p-3 rounded-xl bg-black/30 border border-white/10"
+            required
           />
 
           <input
@@ -69,6 +75,7 @@ function Register() {
             value={form.password}
             onChange={handleChange}
             className="w-full p-3 rounded-xl bg-black/30 border border-white/10"
+            required
           />
 
           <select

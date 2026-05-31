@@ -54,6 +54,14 @@ const loginUser = async (req, res) => {
     // check user
     const user = await User.findOne({ email });
 
+    if (!user.isVerified) {
+
+  return res.status(401).json({
+    message: "Please verify your email first",
+  });
+
+}
+
     if (!user) {
       return res.status(400).json({
         message: "Invalid credentials",

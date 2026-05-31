@@ -3,7 +3,7 @@ const cors = require("cors");
 require("dotenv").config();
 
 const connectDB = require("./config/db");
-
+const otpRoutes = require("./routes/otpRoutes");
 const authRoutes = require("./routes/authRoutes");
 const requirementRoutes = require("./routes/requirementRoutes");
 const workerProfileRoutes = require("./routes/workerProfileRoutes");
@@ -24,8 +24,9 @@ app.use(express.json());
 
 /* ================= ROUTES ================= */
 
-app.use("/api/auth", authRoutes);
 
+app.use("/api/otp", otpRoutes);
+app.use("/api/auth", authRoutes);
 app.use("/api/requirements", requirementRoutes);
 app.use("/api/worker-profile", workerProfileRoutes);
 app.use("/api/tasks", taskRoutes);
