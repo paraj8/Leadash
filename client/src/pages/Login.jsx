@@ -11,6 +11,8 @@ function Login() {
     password: "",
   });
 
+  const [showPassword, setShowPassword] = useState(false);
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -26,7 +28,6 @@ function Login() {
 
       toast.success(`Welcome back ${res.data.user.name}`);
 
-      // role-based redirect (IMPORTANT for next phase)
       const role = res.data.user.role;
 
       if (role === "admin") navigate("/admin");
@@ -52,23 +53,48 @@ function Login() {
 
         <form onSubmit={handleSubmit} className="space-y-4">
 
+          {/* EMAIL */}
           <input
             name="email"
+            type="email"
             placeholder="Email"
             value={form.email}
             onChange={handleChange}
             className="w-full p-3 rounded-xl bg-black/30 border border-white/10"
+            required
           />
 
-          <input
-            name="password"
-            type="password"
-            placeholder="Password"
-            value={form.password}
-            onChange={handleChange}
-            className="w-full p-3 rounded-xl bg-black/30 border border-white/10"
-          />
+          {/* PASSWORD */}
+          <div className="relative">
+            <input
+              name="password"
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              value={form.password}
+              onChange={handleChange}
+              className="w-full p-3 rounded-xl bg-black/30 border border-white/10 pr-16"
+              required
+            />
 
+            <span
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-3 top-3 text-sm text-gray-400 cursor-pointer"
+            >
+              {showPassword ? "Hide" : "Show"}
+            </span>
+          </div>
+
+          {/* FORGOT PASSWORD */}
+          <div className="flex justify-end">
+            <span
+              onClick={() => navigate("/forgot-password")}
+              className="text-sm text-cyan-400 cursor-pointer hover:underline"
+            >
+              Forgot Password?
+            </span>
+          </div>
+
+          {/* LOGIN BUTTON */}
           <button
             type="submit"
             className="w-full bg-cyan-500 text-black font-bold py-3 rounded-xl hover:bg-cyan-400 transition"

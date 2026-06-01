@@ -1,9 +1,11 @@
 const express = require("express");
 const cors = require("cors");
-require("dotenv").config();
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
 
 const connectDB = require("./config/db");
-
+const otpRoutes = require("./routes/otpRoutes");
 const authRoutes = require("./routes/authRoutes");
 const requirementRoutes = require("./routes/requirementRoutes");
 const workerProfileRoutes = require("./routes/workerProfileRoutes");
@@ -24,8 +26,9 @@ app.use(express.json());
 
 /* ================= ROUTES ================= */
 
-app.use("/api/auth", authRoutes);
 
+app.use("/api/otp", otpRoutes);
+app.use("/api/auth", authRoutes);
 app.use("/api/requirements", requirementRoutes);
 app.use("/api/worker-profile", workerProfileRoutes);
 app.use("/api/tasks", taskRoutes);
@@ -43,4 +46,13 @@ const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
+});
+
+//* ================= HEALTH CHECK ================= */
+
+app.get("/health", (req, res) => {
+  res.status(200).json({
+    status: "OK",
+    time: new Date().toISOString(),
+  });
 });

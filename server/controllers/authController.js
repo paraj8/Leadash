@@ -54,6 +54,14 @@ const loginUser = async (req, res) => {
     // check user
     const user = await User.findOne({ email });
 
+    if (!user.isVerified) {
+
+  return res.status(401).json({
+    message: "Please verify your email first",
+  });
+
+}
+
     if (!user) {
       return res.status(400).json({
         message: "Invalid credentials",
@@ -99,7 +107,28 @@ res.status(200).json({
   }
 };
 
+// Reset Password
+
+const resetPassword = async (req, res) => {
+  try {
+    const { email, newPassword } = req.body;
+
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    await User.findOneAndUpdate(
+      { email },
+      { password: hashedPassword }
+    );
+
+    res.json({ message: "Password updated successfully" });
+
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   registerUser,
   loginUser,
+  resetPassword,
 };
