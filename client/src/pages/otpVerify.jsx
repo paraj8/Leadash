@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import API from "../api";
 
-function OTPVerification() {
+function OtpVerify() {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -236,4 +236,4 @@ function OTPVerification() {
   );
 }
 
-export default OTPVerification;
+export default OtpVerify;

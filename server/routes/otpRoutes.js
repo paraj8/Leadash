@@ -7,7 +7,7 @@ const {
   verifyOtp,
 } = require("../controllers/otpController");
 
-const sendEmail = require("../utils/sendEmail"); // ✅ FIXED
+const sendEmail = require("../utils/sendEmail"); 
 
 router.post("/send", sendOtp);
 router.post("/verify", verifyOtp);
