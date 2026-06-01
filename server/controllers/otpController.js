@@ -9,48 +9,34 @@ const sendOtp = async (req, res) => {
   try {
     const { email } = req.body;
 
-    if (!email) {
-      return res.status(400).json({
-        message: "Email is required",
-      });
-    }
+    console.log("OTP REQUEST RECEIVED");
 
-    await Otp.deleteMany({ email });
+    if (!email) {
+      return res.status(400).json({ message: "Email required" });
+    }
 
     const otp = generateOtp();
 
-    const expiresAt = new Date(
-      Date.now() + 10 * 60 * 1000
-    );
+    const expiresAt = new Date(Date.now() + 10 * 60 * 1000);
 
-    await Otp.create({
-      email,
-      otp,
-      expiresAt,
-    });
+    // 🔥 SAFE DB OPERATIONS
+    await Otp.deleteMany({ email });
 
-    console.log("OTP:", otp);
+    await Otp.create({ email, otp, expiresAt });
 
-    await sendEmail(
-      email,
-      "Your Leadash Verification Code",
-      `
-      <h2>Email Verification</h2>
-      <p>Your OTP is:</p>
-      <h1>${otp}</h1>
-      <p>This code expires in 10 minutes.</p>
-      `
-    );
+    console.log("OTP SAVED:", otp);
 
-    res.status(200).json({
-      message: "OTP generated successfully",
-    });
+    await sendEmail(email, "OTP", `<h1>${otp}</h1>`);
+
+    console.log("EMAIL SENT");
+
+    return res.json({ message: "OTP sent" });
 
   } catch (error) {
-    console.log(error);
+    console.log("🔥 ERROR:", error);
 
-    res.status(500).json({
-      message: "Failed to generate OTP",
+    return res.status(500).json({
+      message: error.message,
     });
   }
 };
