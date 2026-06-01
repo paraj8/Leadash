@@ -1,7 +1,7 @@
 const Otp = require("../models/Otp");
+const User = require("../models/User");
 const generateOtp = require("../utils/generateOtp");
 const sendEmail = require("../utils/sendEmail");
-const User = require("../models/User");
 
 /* ================= SEND OTP ================= */
 
@@ -9,37 +9,52 @@ const sendOtp = async (req, res) => {
   try {
     const { email } = req.body;
 
-    console.log("OTP REQUEST RECEIVED");
-
     if (!email) {
-      return res.status(400).json({ message: "Email required" });
+      return res.status(400).json({
+        message: "Email is required",
+      });
     }
 
-    const otp = generateOtp();
-
-    const expiresAt = new Date(Date.now() + 10 * 60 * 1000);
-
-    // 🔥 SAFE DB OPERATIONS
+    // remove old OTPs
     await Otp.deleteMany({ email });
 
-    await Otp.create({ email, otp, expiresAt });
+    // generate OTP
+    const otp = generateOtp();
+    const expiresAt = new Date(Date.now() + 10 * 60 * 1000);
 
-    console.log("OTP SAVED:", otp);
+    // store OTP
+    await Otp.create({
+      email,
+      otp,
+      expiresAt,
+    });
 
-    await sendEmail(email, "OTP", `<h1>${otp}</h1>`);
+    console.log("OTP GENERATED:", otp);
 
-    console.log("EMAIL SENT");
+    // send email
+    await sendEmail(
+      email,
+      "Your Leadash OTP Code",
+      `
+        <div style="font-family:Arial">
+          <h2>OTP Verification</h2>
+          <p>Your OTP code is:</p>
+          <h1 style="letter-spacing:4px">${otp}</h1>
+          <p>This code will expire in 10 minutes.</p>
+        </div>
+      `
+    );
 
-    return res.json({ message: "OTP sent" });
+    return res.status(200).json({
+      message: "OTP sent successfully",
+    });
 
   } catch (error) {
-  console.log("🔥 FULL ERROR:", error);
-  console.log("STACK:", error.stack);
-
-  return res.status(500).json({
-    message: error.message,
-  });
-}
+    console.log("OTP ERROR:", error);
+    return res.status(500).json({
+      message: error.message,
+    });
+  }
 };
 
 /* ================= VERIFY OTP ================= */
@@ -48,30 +63,36 @@ const verifyOtp = async (req, res) => {
   try {
     const { email, otp } = req.body;
 
-    const otpRecord = await Otp.findOne({
-      email,
-      otp,
-    });
+    const record = await Otp.findOne({ email, otp });
 
-    if (!otpRecord) {
+    if (!record) {
       return res.status(400).json({
         message: "Invalid OTP",
       });
     }
 
+    // check expiry
+    if (record.expiresAt < new Date()) {
+      return res.status(400).json({
+        message: "OTP expired",
+      });
+    }
+
+    // verify user
     await User.findOneAndUpdate(
       { email },
       { isVerified: true }
     );
 
+    // cleanup
     await Otp.deleteMany({ email });
 
-    res.status(200).json({
+    return res.status(200).json({
       message: "Email verified successfully",
     });
 
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       message: error.message,
     });
   }
