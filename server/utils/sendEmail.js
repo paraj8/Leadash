@@ -23,7 +23,7 @@ transporter.verify((error) => {
 
 const sendEmail = async (to, subject, html) => {
   const info = await transporter.sendMail({
-    from: `"Leadash" <leadash8@gmail.com>`,
+    from: `"Leadash" <${process.env.SENDER_EMAIL}>`,
     to,
     subject,
     html,
