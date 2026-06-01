@@ -17,25 +17,29 @@ function Register() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    try {
-      await API.post("/auth/register", form);
+  try {
+    // 1. Register user
+    await API.post("/auth/register", form);
 
-      toast.success("OTP sent to your email!");
+    // 2. SEND OTP (THIS WAS MISSING)
+    await API.post("/otp/send", {
+      email: form.email,
+    });
 
-      navigate("/otp-verification", {
-        state: {
-          email: form.email,
-        },
-      });
-    } catch (err) {
-      toast.error(
-        err.response?.data?.message || "Registration failed"
-      );
-    }
-  };
+    toast.success("OTP sent to your email!");
+
+    // 3. Navigate OTP page
+    navigate("/otp-verification", {
+      state: { email: form.email },
+    });
+
+  } catch (err) {
+    toast.error(err.response?.data?.message || "Registration failed");
+  }
+};
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-950 to-slate-900 text-white">
