@@ -42,7 +42,7 @@ export default function Developer() {
             <img
               src="./src/assets/paraj.jpg"
               alt="Paraj Mandal"
-              className="w-full h-full object-cover object-[90%]"
+              className="w-full h-full object-cover"
             />
           </div>
         </div>

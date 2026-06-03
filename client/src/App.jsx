@@ -35,7 +35,7 @@ import WorkerAllTasks from "./pages/worker/WorkerAllTasks.jsx";
 
 /* TEAM PAGES */
 import ParajMandal from "./pages/team/ParajMandal.jsx";
-import VishalPramik from "./pages/team/VishalPramik.jsx";
+import VishalPramanik from "./pages/team/VishalPramanik.jsx";
 import HarshRaj from "./pages/team/HarshRaj.jsx";
 import BhaskarMandal from "./pages/team/BhaskarMandal.jsx";
 
@@ -86,7 +86,7 @@ function App() {
         </Route>
         {/*================= TEAMS ====================*/}
         <Route path="/team/paraj" element={<ParajMandal />} />
-        <Route path="/team/vishal" element={<VishalPramik />} />
+        <Route path="/team/vishal" element={<VishalPramanik />} />
         <Route path="/team/harsh" element={<HarshRaj />} />
         <Route path="/team/bhaskar" element={<BhaskarMandal />} />
 

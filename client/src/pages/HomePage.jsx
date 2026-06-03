@@ -240,9 +240,11 @@ export default function HomePage() {
 
   <a href="/team/paraj">
     <div className="p-8 rounded-3xl bg-white/5 border border-white/10 text-center hover:border-cyan-400/40 transition">
-      <div className="w-24 h-24 rounded-full bg-slate-700 mx-auto mb-4 flex items-center justify-center text-2xl font-bold">
-        PM
-      </div>
+      <img
+  src="/src/assets/paraj.jpg"
+  alt="Paraj Mandal"
+  className="w-24 h-24 rounded-full object-cover mx-auto mb-4 border-2 border-cyan-400"
+/>
       <h3 className="text-2xl font-bold mb-2">
         Paraj Mandal
       </h3>
@@ -254,11 +256,13 @@ export default function HomePage() {
 
   <a href="/team/vishal">
     <div className="p-8 rounded-3xl bg-white/5 border border-white/10 text-center hover:border-cyan-400/40 transition">
-      <div className="w-24 h-24 rounded-full bg-slate-700 mx-auto mb-4 flex items-center justify-center text-2xl font-bold">
-        VP
-      </div>
+      <img
+  src="/src/assets/vishal.jpg"
+  alt="Vishal Pramanik"
+  className="w-24 h-24 rounded-full object-cover mx-auto mb-4 border-2 border-cyan-400"
+/>
       <h3 className="text-2xl font-bold mb-2">
-        Vishal Pramik
+        Vishal Pramanik
       </h3>
       <p className="text-cyan-400">
         Manager
@@ -268,9 +272,11 @@ export default function HomePage() {
 
   <a href="/team/harsh">
     <div className="p-8 rounded-3xl bg-white/5 border border-white/10 text-center hover:border-cyan-400/40 transition">
-      <div className="w-24 h-24 rounded-full bg-slate-700 mx-auto mb-4 flex items-center justify-center text-2xl font-bold">
-        HR
-      </div>
+      <img
+  src="/src/assets/harsh.jpg"
+  alt="Harsh Raj"
+  className="w-24 h-24 rounded-full object-cover mx-auto mb-4 border-2 border-cyan-400"
+/>
       <h3 className="text-2xl font-bold mb-2">
         Harsh Raj
       </h3>
@@ -282,9 +288,11 @@ export default function HomePage() {
 
   <a href="/team/bhaskar">
     <div className="p-8 rounded-3xl bg-white/5 border border-white/10 text-center hover:border-cyan-400/40 transition">
-      <div className="w-24 h-24 rounded-full bg-slate-700 mx-auto mb-4 flex items-center justify-center text-2xl font-bold">
-        BM
-      </div>
+      <img
+  src="/src/assets/bhaskar.jpg"
+  alt="Bhaskar Mandal"
+  className="w-24 h-24 rounded-full object-cover mx-auto mb-4 border-2 border-cyan-400"
+/>
       <h3 className="text-2xl font-bold mb-2">
         Bhaskar Mandal
       </h3>
