@@ -7,7 +7,7 @@ export default function HomePage() {
       <nav className="flex items-center justify-between px-8 py-5 border-b border-white/10 backdrop-blur-md sticky top-0 z-50 bg-slate-950/70">
         <div>
           <h1 className="text-2xl font-bold tracking-wide">
-            Leadash <span className="text-cyan-400">CRM</span>
+            Leadash <span className="text-cyan-400">Task Manager</span>
           </h1>
         </div>
 
@@ -50,19 +50,18 @@ export default function HomePage() {
         {/* LEFT */}
         <div className="flex-1 z-10">
           <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full border border-cyan-400/30 bg-cyan-400/10 text-cyan-300 text-sm mb-6">
-            🚀 Full Stack CRM Platform
+            🚀 Full Stack Task Management Platform
           </div>
 
           <h1 className="text-5xl lg:text-7xl font-black leading-tight">
-            Manage Leads
+            Manage Tasks
             <br />
             <span className="text-cyan-400">Like a Pro</span>
           </h1>
 
           <p className="mt-6 text-lg text-slate-300 max-w-2xl leading-relaxed">
-            Leadash helps recruiters and admins manage hiring workflows,
-            assign leads, track progress, and organize recruitment pipelines
-            with a modern dashboard experience.
+            Leadash helps teams manage tasks,
+            assign works, track progress,monitor productivity, and collabarate efficiently through a modern dashboard experience.
           </p>
 
           <div className="mt-10 flex flex-wrap gap-4">
@@ -82,8 +81,8 @@ export default function HomePage() {
           {/* STATS */}
           <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-5">
             {[
-              ["10K+", "Leads Managed"],
-              ["500+", "Recruiters"],
+              ["10K+", "Tasks Completed"],
+              ["500+", "Team Members"],
               ["99%", "Secure Auth"],
               ["24/7", "Cloud Access"],
             ].map(([number, label]) => (
@@ -105,7 +104,7 @@ export default function HomePage() {
             <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-6">
               <div>
                 <h2 className="text-xl font-bold">Dashboard Preview</h2>
-                <p className="text-sm text-slate-400">Interactive CRM Panel</p>
+                <p className="text-sm text-slate-400">Interactive Task Management Panel</p>
               </div>
 
               <div className="w-3 h-3 rounded-full bg-green-400 animate-pulse" />
@@ -114,10 +113,10 @@ export default function HomePage() {
             {/* Cards */}
             <div className="grid grid-cols-2 gap-4 mb-6">
               {[
-                ["Total Leads", "1240"],
+                 ["Total Tasks", "1240"],
                 ["Pending", "321"],
-                ["Contacted", "598"],
-                ["Hired", "96"],
+                ["In Progress", "598"],
+                ["Completed", "96"],
               ].map(([title, value]) => (
                 <div
                   key={title}
@@ -132,8 +131,8 @@ export default function HomePage() {
             {/* Fake Activity */}
             <div className="space-y-3">
               {[
-                "Lead assigned to recruiter",
-                "New candidate registered",
+              "Task assigned to team members",
+                "New Task created",
                 "Dashboard analytics updated",
               ].map((item) => (
                 <div
@@ -154,36 +153,36 @@ export default function HomePage() {
         <div className="text-center mb-16">
           <h2 className="text-4xl font-black">Powerful Features</h2>
           <p className="text-slate-400 mt-4 max-w-2xl mx-auto">
-            Everything needed to manage recruitment workflow efficiently.
-          </p>
+ Everything needed to manage tasks, teams, and productivity efficiently.          </p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {[
-            {
-              title: "JWT Authentication",
-              desc: "Secure authentication system with protected routes and token-based access.",
-            },
-            {
-              title: "Role Management",
-              desc: "Admin, recruiter, and candidate role-based access control.",
-            },
-            {
-              title: "Lead Assignment",
-              desc: "Assign leads to recruiters and manage workflow efficiently.",
-            },
-            {
-              title: "Dashboard Analytics",
-              desc: "Track pending, hired, contacted, and rejected lead statistics.",
-            },
-            {
-              title: "Modern UI",
-              desc: "Fast, interactive, and responsive dashboard experience.",
-            },
-            {
-              title: "Scalable Architecture",
-              desc: "Structured backend and frontend suitable for real-world SaaS apps.",
-            },
+          {
+[
+  {
+    title: "Task Assignment",
+    desc: "Assign tasks to team members and monitor progress efficiently.",
+  },
+  {
+    title: "Role Management",
+    desc: "Admin, manager, and team member role-based access control.",
+  },
+  {
+    title: "Progress Tracking",
+    desc: "Track pending, active, and completed tasks in real time.",
+  },
+  {
+    title: "Dashboard Analytics",
+    desc: "View productivity and task completion metrics.",
+  },
+  {
+    title: "Modern UI",
+    desc: "Fast, responsive, and user-friendly dashboard experience.",
+  },
+  {
+    title: "Team Collaboration",
+    desc: "Collaborate seamlessly through organized workflows.",
+  },
           ].map((feature) => (
             <div
               key={feature.title}
@@ -209,9 +208,9 @@ export default function HomePage() {
         <div className="grid md:grid-cols-4 gap-8">
           {[
             "Create Account",
-            "Assign Recruiters",
-            "Manage Leads",
-            "Track Hiring",
+            "Assign Tasks",
+            "Manage Team Memebers",
+            "Track Progress",
           ].map((step, index) => (
             <div
               key={step}
@@ -228,18 +227,87 @@ export default function HomePage() {
       </section>
 
       {/* CTA */}
+      {/* TEAM SECTION */}
+<section id="roles" className="px-8 lg:px-20 py-20">
+  <div className="text-center mb-16">
+    <h2 className="text-4xl font-black">Meet Our Team</h2>
+    <p className="text-slate-400 mt-4">
+      The people behind Leadash Task Manager.
+    </p>
+  </div>
+  
+<div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+  <a href="/team/paraj">
+    <div className="p-8 rounded-3xl bg-white/5 border border-white/10 text-center hover:border-cyan-400/40 transition">
+      <div className="w-24 h-24 rounded-full bg-slate-700 mx-auto mb-4 flex items-center justify-center text-2xl font-bold">
+        PM
+      </div>
+      <h3 className="text-2xl font-bold mb-2">
+        Paraj Mandal
+      </h3>
+      <p className="text-cyan-400">
+        Owner & Developer
+      </p>
+    </div>
+  </a>
+
+  <a href="/team/vishal">
+    <div className="p-8 rounded-3xl bg-white/5 border border-white/10 text-center hover:border-cyan-400/40 transition">
+      <div className="w-24 h-24 rounded-full bg-slate-700 mx-auto mb-4 flex items-center justify-center text-2xl font-bold">
+        VP
+      </div>
+      <h3 className="text-2xl font-bold mb-2">
+        Vishal Pramik
+      </h3>
+      <p className="text-cyan-400">
+        Manager
+      </p>
+    </div>
+  </a>
+
+  <a href="/team/harsh">
+    <div className="p-8 rounded-3xl bg-white/5 border border-white/10 text-center hover:border-cyan-400/40 transition">
+      <div className="w-24 h-24 rounded-full bg-slate-700 mx-auto mb-4 flex items-center justify-center text-2xl font-bold">
+        HR
+      </div>
+      <h3 className="text-2xl font-bold mb-2">
+        Harsh Raj
+      </h3>
+      <p className="text-cyan-400">
+        Junior Developer
+      </p>
+    </div>
+  </a>
+
+  <a href="/team/bhaskar">
+    <div className="p-8 rounded-3xl bg-white/5 border border-white/10 text-center hover:border-cyan-400/40 transition">
+      <div className="w-24 h-24 rounded-full bg-slate-700 mx-auto mb-4 flex items-center justify-center text-2xl font-bold">
+        BM
+      </div>
+      <h3 className="text-2xl font-bold mb-2">
+        Bhaskar Mandal
+      </h3>
+      <p className="text-cyan-400">
+        Junior Developer
+      </p>
+    </div>
+  </a>
+
+</div>
+</section>
       <section className="px-8 lg:px-20 py-24 text-center relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 to-purple-500/10 blur-3xl" />
 
         <div className="relative z-10 max-w-3xl mx-auto">
           <h2 className="text-5xl font-black leading-tight">
-            Build Your Hiring Workflow
+            Build Your Task Workflow
             <span className="text-cyan-400"> Faster</span>
           </h2>
 
           <p className="mt-6 text-slate-300 text-lg">
-            Start managing leads, recruiters, and hiring operations with a
-            modern CRM dashboard.
+          Start managing tasks, teams, and productivity with a
+            modern task management dashboard.
           </p>
 
           <div className="mt-10 flex justify-center gap-5 flex-wrap">
@@ -260,7 +328,7 @@ export default function HomePage() {
 
       {/* FOOTER */}
       <footer className="px-8 lg:px-20 py-10 border-t border-white/10 text-center text-slate-500 text-sm">
-        © 2026 Leadash CRM • Built by Paraj Mandal
+        © 2026 Leadash Task Manager • Built by Paraj Mandal & Team
       </footer>
     </div>
   );
