@@ -1,12 +1,12 @@
 
-/*import bhaskharImg from ".src/assets/bhaskar.jpg";*/
+import bhaskharImg from "../../assets/bhaskar.jpg";
 export default function BhaskarMandal() {
   return (
     <div className="min-h-screen bg-slate-950 text-white flex items-center justify-center px-6">
       <div className="max-w-3xl w-full bg-slate-900 p-10 rounded-3xl border border-white/10">
         <div className="flex flex-col items-center">
           <img
-            src="../src/assets/bhaskar.jpg"
+            src={bhaskharImg}
             alt="Bhaskar Mandal"
             className="w-48 h-48 rounded-full object-cover border-4 border-cyan-400 mb-6"
           />
