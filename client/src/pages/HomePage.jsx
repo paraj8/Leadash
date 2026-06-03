@@ -1,4 +1,7 @@
-
+import parajImage from "../assets/paraj.jpg";
+import vishalImage from "../assets/vishal.jpg";
+import harshImage from "../assets/harsh.jpg";
+import bhaskarImage from "../assets/bhaskar.jpg";
 
 export default function HomePage() {
   return (
@@ -241,7 +244,7 @@ export default function HomePage() {
   <a href="/team/paraj">
     <div className="p-8 rounded-3xl bg-white/5 border border-white/10 text-center hover:border-cyan-400/40 transition">
       <img
-  src="/src/assets/paraj.jpg"
+  src={parajImage}
   alt="Paraj Mandal"
   className="w-24 h-24 rounded-full object-cover mx-auto mb-4 border-2 border-cyan-400"
 />
@@ -257,7 +260,7 @@ export default function HomePage() {
   <a href="/team/vishal">
     <div className="p-8 rounded-3xl bg-white/5 border border-white/10 text-center hover:border-cyan-400/40 transition">
       <img
-  src="/src/assets/vishal.jpg"
+  src={vishalImage}
   alt="Vishal Pramanik"
   className="w-24 h-24 rounded-full object-cover mx-auto mb-4 border-2 border-cyan-400"
 />
@@ -273,7 +276,7 @@ export default function HomePage() {
   <a href="/team/harsh">
     <div className="p-8 rounded-3xl bg-white/5 border border-white/10 text-center hover:border-cyan-400/40 transition">
       <img
-  src="/src/assets/harsh.jpg"
+  src={harshImage}
   alt="Harsh Raj"
   className="w-24 h-24 rounded-full object-cover mx-auto mb-4 border-2 border-cyan-400"
 />
@@ -289,7 +292,7 @@ export default function HomePage() {
   <a href="/team/bhaskar">
     <div className="p-8 rounded-3xl bg-white/5 border border-white/10 text-center hover:border-cyan-400/40 transition">
       <img
-  src="/src/assets/bhaskar.jpg"
+  src={bhaskarImage}
   alt="Bhaskar Mandal"
   className="w-24 h-24 rounded-full object-cover mx-auto mb-4 border-2 border-cyan-400"
 />
