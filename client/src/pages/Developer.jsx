@@ -1,4 +1,4 @@
-
+import parajImage from "../assets/paraj.jpg";
 export default function Developer() {
   return (
     <div className="min-h-screen bg-[#0B1120] text-white">
@@ -40,7 +40,7 @@ export default function Developer() {
         <div className="flex-1 z-10 flex justify-center">
           <div className="w-[350px] h-[450px] rounded-[30px] overflow-hidden border border-slate-800 shadow-2xl">
             <img
-              src="./src/assets/paraj.jpg"
+              src={parajImage}
               alt="Paraj Mandal"
               className="w-full h-full object-cover"
             />
