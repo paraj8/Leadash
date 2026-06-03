@@ -33,6 +33,12 @@ import WorkerDashboard from "./pages/worker/WorkerDashboard.jsx";
 import WorkerProfile from "./pages/worker/WorkerProfile.jsx";
 import WorkerAllTasks from "./pages/worker/WorkerAllTasks.jsx";
 
+/* TEAM PAGES */
+import ParajMandal from "./pages/team/ParajMandal.jsx";
+import VishalPramik from "./pages/team/VishalPramik.jsx";
+import HarshRaj from "./pages/team/HarshRaj.jsx";
+import BhaskarMandal from "./pages/team/BhaskarMandal.jsx";
+
 function App() {
   return (
     <BrowserRouter>
@@ -78,6 +84,11 @@ function App() {
           <Route path="/worker/worker-all-tasks" element={<WorkerAllTasks />} />
 
         </Route>
+        {/*================= TEAMS ====================*/}
+        <Route path="/team/paraj" element={<ParajMandal />} />
+        <Route path="/team/vishal" element={<VishalPramik />} />
+        <Route path="/team/harsh" element={<HarshRaj />} />
+        <Route path="/team/bhaskar" element={<BhaskarMandal />} />
 
       </Routes>
     </BrowserRouter>
