@@ -75,156 +75,156 @@ const user = JSON.parse(
 );
 
   return (
-    <div>
+   <div>
 
-      <h1 className="text-4xl font-black">
-        All Tasks
-      </h1>
+  <h1 className="text-2xl md:text-3xl lg:text-4xl font-black">
+    All Tasks
+  </h1>
 
-      <p className="text-slate-500 dark:text-slate-400 mt-2">
-        Manage all created tasks and candidate progress
-      </p>
+  <p className="text-sm md:text-base text-slate-500 dark:text-slate-400 mt-2">
+    Manage all created tasks and candidate progress
+  </p>
 
-      <div className="mt-10 overflow-x-auto rounded-3xl border border-black/10 dark:border-white/10">
+  <div className="mt-6 md:mt-10 overflow-x-auto rounded-2xl md:rounded-3xl border border-black/10 dark:border-white/10">
 
-        <table className="w-full">
+    <table className="w-full min-w-[1100px]">
 
-          <thead className="bg-slate-200 dark:bg-white/5">
+      <thead className="bg-slate-200 dark:bg-white/5">
 
-            <tr className="text-left">
+        <tr className="text-left">
 
-              <th className="px-5 py-3 font-semibold">
-                Task
-              </th>
+          <th className="px-3 md:px-5 py-3 text-sm md:text-base font-semibold whitespace-nowrap">
+            Task
+          </th>
 
-              <th className="px-5 py-3 font-semibold">
-                Company
-              </th>
+          <th className="px-3 md:px-5 py-3 text-sm md:text-base font-semibold whitespace-nowrap">
+            Company
+          </th>
 
-              <th className="px-5 py-3 font-semibold">
-                Workers
-              </th>
+          <th className="px-3 md:px-5 py-3 text-sm md:text-base font-semibold whitespace-nowrap">
+            Workers
+          </th>
 
-              <th className="px-5 py-3 font-semibold">
-                Status
-              </th>
+          <th className="px-3 md:px-5 py-3 text-sm md:text-base font-semibold whitespace-nowrap">
+            Status
+          </th>
 
-              <th className="px-5 py-3 font-semibold">
-                Priority
-              </th>
+          <th className="px-3 md:px-5 py-3 text-sm md:text-base font-semibold whitespace-nowrap">
+            Priority
+          </th>
 
-              <th className="px-5 py-3 font-semibold">
-                Deadline
-              </th>
+          <th className="px-3 md:px-5 py-3 text-sm md:text-base font-semibold whitespace-nowrap">
+            Deadline
+          </th>
 
-              <th className="px-5 py-3 font-semibold">
-                Created Date
-              </th>
+          <th className="px-3 md:px-5 py-3 text-sm md:text-base font-semibold whitespace-nowrap">
+            Created Date
+          </th>
 
-              <th className="px-5 py-3 font-semibold">
-                Actions
-              </th>
+          <th className="px-3 md:px-5 py-3 text-sm md:text-base font-semibold whitespace-nowrap">
+            Actions
+          </th>
 
-            </tr>
+        </tr>
 
+      </thead>
 
+      <tbody>
 
-          </thead>
+        {tasks.map((task) => (
 
-          <tbody>
+          <tr
+            key={task._id}
+            className="border-t border-black/10 dark:border-white/10"
+          >
 
-            {tasks.map((task) => (
+            {/* TITLE */}
+            <td className="px-3 md:px-5 py-3 font-medium whitespace-nowrap">
+              {task.title}
+            </td>
 
-              <tr
-                key={task._id}
-                className="border-t border-black/10 dark:border-white/10"
-              >
-{/* title */}
-                <td className="px-5 py-3 font-medium">
-                  {task.title}
-                </td>
-{/* company */}
-                <td className="px-5 py-3">
-                  {task.company}
-                </td>
-{/* workers */}
-                <td className="px-5 py-3">
+            {/* COMPANY */}
+            <td className="px-3 md:px-5 py-3 whitespace-nowrap">
+              {task.company}
+            </td>
 
-                  <div className="flex flex-wrap gap-2">
+            {/* WORKERS */}
+            <td className="px-3 md:px-5 py-3">
 
-                    {task.workers.map((worker) => (
+              <div className="flex flex-wrap gap-2">
 
-                      <span
-                        key={worker._id}
-                        className="px-3 py-1 rounded-full text-sm bg-slate-100 dark:bg-white/10"
-                      >
-                        {worker.name}
-                      </span>
-
-                    ))}
-
-                  </div>
-
-                </td>
-{/* status */}
-                <td className="px-5 py-3">
+                {task.workers.map((worker) => (
 
                   <span
-                    className={`px-4 py-2 rounded-full text-sm font-medium
-
-                    ${
-                      task.status === "Pending"
-                        ? "bg-yellow-500/10 text-yellow-600 dark:text-yellow-300"
-                        : task.status === "In Progress"
-                        ? "bg-cyan-500/10 text-cyan-600 dark:text-cyan-300"
-                        : "bg-green-500/10 text-green-600 dark:text-green-300"
-                    }
-                    `}
+                    key={worker._id}
+                    className="px-2 md:px-3 py-1 rounded-full text-xs md:text-sm bg-slate-100 dark:bg-white/10 whitespace-nowrap"
                   >
-                    {task.status}
+                    {worker.name}
                   </span>
 
-                </td>
-{/* priority */}
-                  <td className="px-5 py-3">
+                ))}
 
-                    <span
-                      className={`px-3 py-1 rounded-full text-sm font-medium
+              </div>
 
-                      ${
-                        task.priority === "High"
-                          ? "bg-red-500/10 text-red-500"
-                          : task.priority === "Medium"
-                          ? "bg-yellow-500/10 text-yellow-500"
-                          : "bg-slate-500/10 text-slate-500"
-                      }
-                      `}
-                    >
-                      {task.priority || "Medium"}
-                    </span>
+            </td>
 
-                  </td>
-{/* deadline */}
-                  <td className="px-5 py-3 text-slate-500 dark:text-slate-400">
+            {/* STATUS */}
+            <td className="px-3 md:px-5 py-3">
 
-                    {
-                      task.deadline
-                        ? new Date(task.deadline)
-                            .toLocaleDateString()
-                        : "No Deadline"
-                    }
+              <span
+                className={`px-3 py-1.5 rounded-full text-xs md:text-sm font-medium whitespace-nowrap
 
-                  </td>
-{/* created date */}
+                ${
+                  task.status === "Pending"
+                    ? "bg-yellow-500/10 text-yellow-600 dark:text-yellow-300"
+                    : task.status === "In Progress"
+                    ? "bg-cyan-500/10 text-cyan-600 dark:text-cyan-300"
+                    : "bg-green-500/10 text-green-600 dark:text-green-300"
+                }
+                `}
+              >
+                {task.status}
+              </span>
 
-                <td className="px-5 py-3 text-slate-500 dark:text-slate-400">
+            </td>
 
-                  {new Date(task.createdAt).toLocaleDateString()}
+            {/* PRIORITY */}
+            <td className="px-3 md:px-5 py-3">
 
-                </td>
+              <span
+                className={`px-2 md:px-3 py-1 rounded-full text-xs md:text-sm font-medium whitespace-nowrap
 
-{/* actions (only for task creator) */}
-<td className="px-5 py-3 relative">
+                ${
+                  task.priority === "High"
+                    ? "bg-red-500/10 text-red-500"
+                    : task.priority === "Medium"
+                    ? "bg-yellow-500/10 text-yellow-500"
+                    : "bg-slate-500/10 text-slate-500"
+                }
+                `}
+              >
+                {task.priority || "Medium"}
+              </span>
+
+            </td>
+
+            {/* DEADLINE */}
+            <td className="px-3 md:px-5 py-3 text-xs md:text-sm text-slate-500 dark:text-slate-400 whitespace-nowrap">
+
+              {task.deadline
+                ? new Date(task.deadline).toLocaleDateString()
+                : "No Deadline"}
+
+            </td>
+
+            {/* CREATED DATE */}
+            <td className="px-3 md:px-5 py-3 text-xs md:text-sm text-slate-500 dark:text-slate-400 whitespace-nowrap">
+
+              {new Date(task.createdAt).toLocaleDateString()}
+
+            </td>
+{/* ACTIONS */}
+<td className="px-3 md:px-5 py-3 relative whitespace-nowrap">
 
   {
     task.createdBy?._id === user?.id && (
@@ -232,7 +232,6 @@ const user = JSON.parse(
       <>
 
         {/* SETTINGS BUTTON */}
-
         <button
           onClick={() =>
             setActiveTask(
@@ -242,7 +241,7 @@ const user = JSON.parse(
             )
           }
           className="
-            w-10 h-10
+            w-9 h-9 md:w-10 md:h-10
             flex items-center justify-center
             rounded-xl
             bg-slate-100
@@ -253,63 +252,59 @@ const user = JSON.parse(
             transition
           "
         >
-
-          <Settings2 size={18} />
-
+          <Settings2 size={16} className="md:w-[18px] md:h-[18px]" />
         </button>
 
         {/* POPUP */}
-
         {
           activeTask === task._id && (
 
             <>
 
               {/* BACKDROP */}
-
               <div
-                onClick={() =>
-                  setActiveTask(null)
-                }
+                onClick={() => setActiveTask(null)}
                 className="
-                  fixed inset-0 z-40 bg-black/40 backdrop-blur-sm
+                  fixed inset-0 z-40
+                  bg-black/40 backdrop-blur-sm
                 "
               />
 
               {/* WINDOW */}
-
               <div
                 className="
                   fixed
-                  top-1/2
-                  left-1/2
+                  top-1/2 left-1/2
                   -translate-x-1/2
                   -translate-y-1/2
                   z-[100]
-                  w-[85%]
-                  max-w-xs
+
+                  w-[92%]
+                  max-w-xs md:max-w-sm
+
                   bg-white
                   dark:bg-slate-950
+
                   border border-black/10
                   dark:border-white/10
-                  rounded-3xl
-                  p-6
+
+                  rounded-2xl md:rounded-3xl
+
+                  p-4 md:p-6
+
                   shadow-2xl
                 "
               >
 
                 {/* TOP */}
+                <div className="flex items-center justify-between mb-4 md:mb-5">
 
-                <div className="flex items-center justify-between mb-5">
-
-                  <h3 className="font-bold text-lg">
+                  <h3 className="font-bold text-base md:text-lg">
                     Task Settings
                   </h3>
 
                   <button
-                    onClick={() =>
-                      setActiveTask(null)
-                    }
+                    onClick={() => setActiveTask(null)}
                     className="
                       w-8 h-8
                       rounded-lg
@@ -318,15 +313,12 @@ const user = JSON.parse(
                       dark:hover:bg-white/10
                     "
                   >
-
                     <X size={18} />
-
                   </button>
 
                 </div>
 
                 {/* STATUS */}
-
                 <div className="mb-4">
 
                   <label className="block mb-2 text-sm font-medium">
@@ -342,6 +334,7 @@ const user = JSON.parse(
                     }
                     className="
                       w-full
+                      text-sm md:text-base
                       bg-slate-100
                       dark:bg-slate-900
                       border border-black/10
@@ -350,25 +343,14 @@ const user = JSON.parse(
                       px-3 py-2
                     "
                   >
-
-                    <option value="Pending">
-                      Pending
-                    </option>
-
-                    <option value="In Progress">
-                      In Progress
-                    </option>
-
-                    <option value="Completed">
-                      Completed
-                    </option>
-
+                    <option value="Pending">Pending</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Completed">Completed</option>
                   </select>
 
                 </div>
 
                 {/* PRIORITY */}
-
                 <div className="mb-4">
 
                   <label className="block mb-2 text-sm font-medium">
@@ -384,6 +366,7 @@ const user = JSON.parse(
                     }
                     className="
                       w-full
+                      text-sm md:text-base
                       bg-slate-100
                       dark:bg-slate-900
                       border border-black/10
@@ -392,25 +375,14 @@ const user = JSON.parse(
                       px-3 py-2
                     "
                   >
-
-                    <option value="Low">
-                      Low
-                    </option>
-
-                    <option value="Medium">
-                      Medium
-                    </option>
-
-                    <option value="High">
-                      High
-                    </option>
-
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
                   </select>
 
                 </div>
 
                 {/* DEADLINE */}
-
                 <div>
 
                   <label className="block mb-2 text-sm font-medium">
@@ -431,6 +403,7 @@ const user = JSON.parse(
                     }
                     className="
                       w-full
+                      text-sm md:text-base
                       bg-slate-100
                       dark:bg-slate-900
                       border border-black/10

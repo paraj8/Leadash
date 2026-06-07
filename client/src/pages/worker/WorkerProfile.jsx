@@ -79,217 +79,331 @@ const submitHandler = async (e) => {
 
 };
 
-  return (
-    <div>
+return (
+  <div className="space-y-8">
 
-      <h1 className="text-4xl font-black">
+    {/* HEADER */}
+    <div>
+      <h1 className="text-3xl md:text-4xl font-black tracking-tight">
         Worker Profile
       </h1>
 
       <p className="text-slate-500 dark:text-slate-400 mt-2">
         Update your professional profile information
       </p>
+    </div>
 
-      <form
-        onSubmit={submitHandler}
-        className="mt-10 bg-white dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-3xl p-8 max-w-4xl"
-      >
+    {/* PROFILE SUMMARY */}
+    <div
+      className="
+        bg-white dark:bg-white/5
+        border border-black/10 dark:border-white/10
+        rounded-3xl
+        p-6
+      "
+    >
+      <div className="flex items-center gap-5">
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-          {/* NAME */}
-          <div>
-
-            <label className="block mb-3 font-medium">
-              Full Name
-            </label>
-
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={changeHandler}
-              placeholder="Enter your full name"
-              className="w-full bg-slate-100 dark:bg-slate-900 border border-black/10 dark:border-white/10 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-cyan-500"
-              required
-            />
-
-          </div>
-
-          {/* EMAIL */}
-          <div>
-
-            <label className="block mb-3 font-medium">
-              Email Address
-            </label>
-
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={changeHandler}
-              placeholder="Enter your email"
-              className="w-full bg-slate-100 dark:bg-slate-900 border border-black/10 dark:border-white/10 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-cyan-500"
-              required
-            />
-
-          </div>
-
-          {/* MOBILE */}
-          <div>
-
-            <label className="block mb-3 font-medium">
-              Mobile Number
-            </label>
-
-            <input
-              type="text"
-              name="mobile"
-              value={formData.mobile}
-              onChange={changeHandler}
-              placeholder="Enter mobile number"
-              className="w-full bg-slate-100 dark:bg-slate-900 border border-black/10 dark:border-white/10 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-cyan-500"
-              required
-            />
-
-          </div>
-
-          {/* EXPERIENCE */}
-          <div>
-
-            <label className="block mb-3 font-medium">
-              Work Experience
-            </label>
-
-            <input
-              type="text"
-              name="experience"
-              value={formData.experience}
-              onChange={changeHandler}
-              placeholder="Example: 2 Years"
-              className="w-full bg-slate-100 dark:bg-slate-900 border border-black/10 dark:border-white/10 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-cyan-500"
-              required
-            />
-
-          </div>
-
+        <div
+          className="
+            w-16 h-16
+            rounded-2xl
+            bg-cyan-500/10
+            text-cyan-500
+            flex items-center justify-center
+            text-2xl font-black
+          "
+        >
+          {formData.name?.charAt(0) || "W"}
         </div>
 
-       {/* SKILLS */}
-<div className="mt-8">
+        <div>
+          <h2 className="text-xl font-bold">
+            {formData.name || "Worker"}
+          </h2>
 
-  <label className="block mb-3 font-medium">
-    Skills
-  </label>
+          <p className="text-slate-500 dark:text-slate-400">
+            {formData.email}
+          </p>
+        </div>
 
-  {/* SELECT DROPDOWN */}
-  <select
-    onChange={(e) => {
-      const selectedSkill = e.target.value;
+      </div>
+    </div>
 
-      if (
-        selectedSkill &&
-        !formData.skills.includes(selectedSkill)
-      ) {
-        setFormData({
-          ...formData,
-          skills: [
-            ...formData.skills,
-            selectedSkill,
-          ],
-        });
-      }
+    {/* FORM */}
+    <form
+      onSubmit={submitHandler}
+      className="
+        bg-white dark:bg-white/5
+        border border-black/10 dark:border-white/10
+        rounded-3xl
+        p-6 md:p-8
+      "
+    >
 
-      e.target.value = "";
-    }}
-    className="w-full bg-slate-100 dark:bg-slate-900 border border-black/10 dark:border-white/10 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-cyan-500"
-  >
+      {/* SECTION TITLE */}
+      <div className="mb-8">
+        <h2 className="text-xl font-bold">
+          Personal Information
+        </h2>
 
-    <option value="">
-      Select Skill
-    </option>
+        <p className="text-slate-500 dark:text-slate-400 mt-1">
+          Keep your profile details up to date
+        </p>
+      </div>
 
-    {skillsList.map((skill) => (
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-      <option
-        key={skill._id}
-        value={skill.name}
-      >
-        {skill.name}
-      </option>
+        {/* NAME */}
+        <div>
+          <label className="block mb-3 font-medium">
+            Full Name
+          </label>
 
-    ))}
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={changeHandler}
+            placeholder="Enter your full name"
+            className="
+              w-full
+              bg-slate-100 dark:bg-slate-900
+              border border-black/10 dark:border-white/10
+              rounded-2xl
+              px-5 py-3
+              outline-none
+              focus:ring-2 focus:ring-cyan-500
+            "
+            required
+          />
+        </div>
 
-  </select>
+        {/* EMAIL */}
+        <div>
+          <label className="block mb-3 font-medium">
+            Email Address
+          </label>
 
-  {/* SELECTED SKILLS */}
-  <div className="flex flex-wrap gap-3 mt-5">
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={changeHandler}
+            placeholder="Enter your email"
+            className="
+              w-full
+              bg-slate-100 dark:bg-slate-900
+              border border-black/10 dark:border-white/10
+              rounded-2xl
+              px-5 py-3
+              outline-none
+              focus:ring-2 focus:ring-cyan-500
+            "
+            required
+          />
+        </div>
 
-    {formData.skills.map((skill, index) => (
+        {/* MOBILE */}
+        <div>
+          <label className="block mb-3 font-medium">
+            Mobile Number
+          </label>
 
-      <div
-        key={index}
-        className="flex items-center gap-3 bg-cyan-500/10 border border-cyan-500/20 px-4 py-2 rounded-2xl"
-      >
+          <input
+            type="text"
+            name="mobile"
+            value={formData.mobile}
+            onChange={changeHandler}
+            placeholder="Enter mobile number"
+            className="
+              w-full
+              bg-slate-100 dark:bg-slate-900
+              border border-black/10 dark:border-white/10
+              rounded-2xl
+              px-5 py-3
+              outline-none
+              focus:ring-2 focus:ring-cyan-500
+            "
+            required
+          />
+        </div>
 
-        <span>
-          {skill}
-        </span>
+        {/* EXPERIENCE */}
+        <div>
+          <label className="block mb-3 font-medium">
+            Work Experience
+          </label>
 
-        <button
-          type="button"
-          onClick={() =>
-            setFormData({
-              ...formData,
-              skills: formData.skills.filter(
-                (item) => item !== skill
-              ),
-            })
-          }
-          className="text-red-500 font-bold"
-        >
-          ×
-        </button>
+          <input
+            type="text"
+            name="experience"
+            value={formData.experience}
+            onChange={changeHandler}
+            placeholder="Example: 2 Years"
+            className="
+              w-full
+              bg-slate-100 dark:bg-slate-900
+              border border-black/10 dark:border-white/10
+              rounded-2xl
+              px-5 py-3
+              outline-none
+              focus:ring-2 focus:ring-cyan-500
+            "
+            required
+          />
+        </div>
 
       </div>
 
-    ))}
+      {/* SKILLS */}
+      <div className="mt-8">
 
-  </div>
+        <label className="block mb-3 font-medium">
+          Skills
+        </label>
 
-</div>
+        <select
+          onChange={(e) => {
+            const selectedSkill = e.target.value;
 
-        {/* BIO */}
-        <div className="mt-8">
+            if (
+              selectedSkill &&
+              !formData.skills.includes(selectedSkill)
+            ) {
+              setFormData({
+                ...formData,
+                skills: [
+                  ...formData.skills,
+                  selectedSkill,
+                ],
+              });
+            }
 
-          <label className="block mb-3 font-medium">
-            Bio Description
-          </label>
+            e.target.value = "";
+          }}
+          className="
+            w-full
+            bg-slate-100 dark:bg-slate-900
+            border border-black/10 dark:border-white/10
+            rounded-2xl
+            px-5 py-3
+            outline-none
+            focus:ring-2 focus:ring-cyan-500
+          "
+        >
+          <option value="">
+            Select Skill
+          </option>
 
-          <textarea
-            name="bio"
-            value={formData.bio}
-            onChange={changeHandler}
-            placeholder="Write something about yourself..."
-            rows="5"
-            className="w-full bg-slate-100 dark:bg-slate-900 border border-black/10 dark:border-white/10 rounded-2xl px-5 py-4 outline-none focus:ring-2 focus:ring-cyan-500 resize-none"
-            required
-          />
+          {skillsList.map((skill) => (
+            <option
+              key={skill._id}
+              value={skill.name}
+            >
+              {skill.name}
+            </option>
+          ))}
+        </select>
+
+        {/* SELECTED SKILLS */}
+        <div className="flex flex-wrap gap-3 mt-5">
+
+          {formData.skills.map((skill, index) => (
+
+            <div
+              key={index}
+              className="
+                flex items-center gap-3
+                px-4 py-2
+                rounded-2xl
+                bg-cyan-500/10
+                border border-cyan-500/20
+              "
+            >
+              <span>{skill}</span>
+
+              <button
+                type="button"
+                onClick={() =>
+                  setFormData({
+                    ...formData,
+                    skills: formData.skills.filter(
+                      (item) => item !== skill
+                    ),
+                  })
+                }
+                className="
+                  text-red-500
+                  font-bold
+                  hover:scale-110
+                  transition
+                "
+              >
+                ×
+              </button>
+
+            </div>
+
+          ))}
 
         </div>
 
-        {/* BUTTON */}
+      </div>
+
+      {/* BIO */}
+      <div className="mt-8">
+
+        <label className="block mb-3 font-medium">
+          Bio Description
+        </label>
+
+        <textarea
+          name="bio"
+          value={formData.bio}
+          onChange={changeHandler}
+          placeholder="Write something about yourself..."
+          rows="6"
+          className="
+            w-full
+            bg-slate-100 dark:bg-slate-900
+            border border-black/10 dark:border-white/10
+            rounded-2xl
+            px-5 py-4
+            outline-none
+            focus:ring-2 focus:ring-cyan-500
+            resize-none
+          "
+          required
+        />
+
+      </div>
+
+      {/* BUTTON */}
+      <div className="mt-8 flex justify-end">
+
         <button
           type="submit"
-          className="mt-8 bg-cyan-500 hover:bg-cyan-400 transition px-8 py-3 rounded-2xl font-semibold text-black"
+          className="
+            bg-cyan-500
+            hover:bg-cyan-400
+            transition
+            px-8 py-3
+            rounded-2xl
+            font-semibold
+            text-black
+            shadow-lg shadow-cyan-500/20
+          "
         >
           Save Profile
         </button>
 
-      </form>
+      </div>
 
-    </div>
-  );
+    </form>
+
+  </div>
+);
 }
 
 export default WorkerProfile;

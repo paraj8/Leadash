@@ -137,225 +137,305 @@ const submitHandler = async (e) => {
 
 };
 
-  return (
-    <div>
+return (
+  <div className="space-y-8">
 
-      <h1 className="text-4xl font-black">
+    {/* HEADER */}
+    <div>
+      <h1 className="text-3xl md:text-4xl lg:text-5xl font-black">
         Create Task
       </h1>
 
-      <p className="text-slate-500 dark:text-slate-400 mt-2">
+      <p className="text-slate-500 dark:text-slate-400 mt-2 text-sm md:text-base">
         Create and assign tasks to workers
       </p>
-
-      <form
-        onSubmit={submitHandler}
-        className="mt-8 bg-white dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-3xl p-8"
-      >
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-          {/* TASK TITLE */}
-          <div>
-
-            <label className="block mb-3 font-medium">
-              Task Title
-            </label>
-
-            <input
-              type="text"
-              name="title"
-              placeholder="Enter task title"
-              value={formData.title}
-              onChange={changeHandler}
-              className="w-full bg-slate-100 dark:bg-slate-900 border border-black/10 dark:border-white/10 rounded-2xl px-5 py-2 outline-none focus:ring-2 focus:ring-cyan-500"
-              required
-            />
-
-          </div>
-
-          {/* COMPANY */}
-          <div>
-
-            <label className="block mb-3 font-medium">
-              Company
-            </label>
-
-            <select
-              name="company"
-              value={formData.company}
-              onChange={changeHandler}
-              className="w-full bg-slate-100 dark:bg-slate-900 border border-black/10 dark:border-white/10 rounded-2xl px-5 py-2 outline-none focus:ring-2 focus:ring-cyan-500"
-              required
-            >
-
-              <option value="">
-                Select Company
-              </option>
-
-              {companies.map((company) => (
-
-                <option
-                  key={company._id}
-                  value={company.name}
-                >
-                  {company.name}
-                </option>
-
-              ))}
-
-            </select>
-
-          </div>
-
-          {/* DEPARTMENT */}
-          <div>
-
-            <label className="block mb-3 font-medium">
-              Department
-            </label>
-
-            <input
-              type="text"
-              name="department"
-              placeholder="Enter department"
-              value={formData.department}
-              onChange={changeHandler}
-              className="w-full bg-slate-100 dark:bg-slate-900 border border-black/10 dark:border-white/10 rounded-2xl px-5 py-2 outline-none focus:ring-2 focus:ring-cyan-500"
-              required
-            />
-
-          </div>
-
-          {/* SKILL */}
-          <div>
-
-            <label className="block mb-3 font-medium">
-              Skill Required
-            </label>
-
-            <select
-              name="skill"
-              value={formData.skill}
-              onChange={changeHandler}
-              className="w-full bg-slate-100 dark:bg-slate-900 border border-black/10 dark:border-white/10 rounded-2xl px-5 py-2 outline-none focus:ring-2 focus:ring-cyan-500"
-              required
-            >
-
-              <option value="">
-                Select Skill
-              </option>
-
-              {skills.map((skill) => (
-
-                <option
-                  key={skill._id}
-                  value={skill.name}
-                >
-                  {skill.name}
-                </option>
-
-              ))}
-
-            </select>
-
-          </div>
-
-        </div>
-
-{/* ASSIGN WORKERS */}
-<div className="mt-5" ref={wrapperRef}>
-
-  <label className="block mb-4 font-medium">
-    Assign Workers
-  </label>
-
-  {/* INPUT BOX */}
-  <div
-    onClick={() => setOpenWorkerBox(true)}
-    className="w-full bg-slate-100 dark:bg-slate-900 border border-black/10 dark:border-white/10 rounded-2xl px-5 py-2 cursor-pointer"
-  >
-    {formData.workers.length === 0
-      ? "Click to select workers"
-      : `${formData.workers.length} worker(s) selected`}
-  </div>
-
-  {/* DROPDOWN PANEL */}
-  {openWorkerBox && (
-    <div className="mt-3 bg-white dark:bg-slate-900 border border-black/10 dark:border-white/10 rounded-2xl p-4 shadow-xl max-h-72 overflow-y-auto">
-
-      {filteredWorkers.length === 0 ? (
-        <p className="text-slate-500">No workers found</p>
-      ) : (
-        filteredWorkers.map((worker) => (
-          <div
-            key={worker._id}
-            onClick={() => {
-              setFormData((prev) => {
-                const exists = prev.workers.includes(worker._user);
-
-                return {
-                  ...prev,
-                  workers: exists
-                    ? prev.workers.filter((id) => id !== worker.user)
-                    : [...prev.workers, worker.user],
-                };
-              });
-            }}
-            className={`flex justify-between items-center px-4 py-3 rounded-xl cursor-pointer mb-2 transition ${
-              formData.workers.includes(worker._user)
-                ? "bg-cyan-500/20 border border-cyan-500"
-                : "hover:bg-slate-100 dark:hover:bg-white/5"
-            }`}
-          >
-            <div>
-              <p className="font-semibold">{worker.name}</p>
-              <p className="text-sm text-slate-500">
-                {worker.skills.join(", ")}
-              </p>
-            </div>
-
-            {formData.workers.includes(worker._user) && (
-              <span className="text-cyan-500 font-bold">✓</span>
-            )}
-          </div>
-        ))
-      )}
     </div>
-  )}
 
-</div>
+    {/* FORM CARD */}
+    <form
+      onSubmit={submitHandler}
+      className="
+        bg-white dark:bg-white/5
+        border border-black/10 dark:border-white/10
+        rounded-2xl md:rounded-3xl
+        p-5 md:p-8
+        shadow-sm
+      "
+    >
+      {/* FORM GRID */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 md:gap-6">
 
-        {/* NOTE */}
-        <div className="mt-4">
-
-          <label className="block mb-3 font-medium">
-            Note
+        {/* TASK TITLE */}
+        <div>
+          <label className="block mb-2 font-medium text-sm md:text-base">
+            Task Title
           </label>
 
-          <textarea
-            name="note"
-            rows="5"
-            placeholder="Enter task note..."
-            value={formData.note}
+          <input
+            type="text"
+            name="title"
+            placeholder="Enter task title"
+            value={formData.title}
             onChange={changeHandler}
-            className="w-full bg-slate-100 dark:bg-slate-900 border border-black/10 dark:border-white/10 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-cyan-500 resize-none"
+            className="
+              w-full
+              h-12
+              bg-slate-100 dark:bg-slate-900
+              border border-black/10 dark:border-white/10
+              rounded-xl md:rounded-2xl
+              px-4
+              outline-none
+              focus:ring-2 focus:ring-cyan-500
+            "
+            required
           />
-
         </div>
 
-        {/* BUTTON */}
+        {/* COMPANY */}
+        <div>
+          <label className="block mb-2 font-medium text-sm md:text-base">
+            Company
+          </label>
+
+          <select
+            name="company"
+            value={formData.company}
+            onChange={changeHandler}
+            className="
+              w-full
+              h-12
+              bg-slate-100 dark:bg-slate-900
+              border border-black/10 dark:border-white/10
+              rounded-xl md:rounded-2xl
+              px-4
+              outline-none
+              focus:ring-2 focus:ring-cyan-500
+            "
+            required
+          >
+            <option value="">Select Company</option>
+
+            {companies.map((company) => (
+              <option
+                key={company._id}
+                value={company.name}
+              >
+                {company.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {/* DEPARTMENT */}
+        <div>
+          <label className="block mb-2 font-medium text-sm md:text-base">
+            Department
+          </label>
+
+          <input
+            type="text"
+            name="department"
+            placeholder="Enter department"
+            value={formData.department}
+            onChange={changeHandler}
+            className="
+              w-full
+              h-12
+              bg-slate-100 dark:bg-slate-900
+              border border-black/10 dark:border-white/10
+              rounded-xl md:rounded-2xl
+              px-4
+              outline-none
+              focus:ring-2 focus:ring-cyan-500
+            "
+            required
+          />
+        </div>
+
+        {/* SKILL */}
+        <div>
+          <label className="block mb-2 font-medium text-sm md:text-base">
+            Skill Required
+          </label>
+
+          <select
+            name="skill"
+            value={formData.skill}
+            onChange={changeHandler}
+            className="
+              w-full
+              h-12
+              bg-slate-100 dark:bg-slate-900
+              border border-black/10 dark:border-white/10
+              rounded-xl md:rounded-2xl
+              px-4
+              outline-none
+              focus:ring-2 focus:ring-cyan-500
+            "
+            required
+          >
+            <option value="">Select Skill</option>
+
+            {skills.map((skill) => (
+              <option
+                key={skill._id}
+                value={skill.name}
+              >
+                {skill.name}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+
+      {/* ASSIGN WORKERS */}
+      <div className="mt-6" ref={wrapperRef}>
+        <label className="block mb-3 font-medium text-sm md:text-base">
+          Assign Workers
+        </label>
+
+        <div
+          onClick={() => setOpenWorkerBox(true)}
+          className="
+            w-full
+            min-h-[48px]
+            flex items-center
+            bg-slate-100 dark:bg-slate-900
+            border border-black/10 dark:border-white/10
+            rounded-xl md:rounded-2xl
+            px-4
+            cursor-pointer
+          "
+        >
+          {formData.workers.length === 0
+            ? "Click to select workers"
+            : `${formData.workers.length} worker(s) selected`}
+        </div>
+
+        {openWorkerBox && (
+          <div
+            className="
+              mt-3
+              bg-white dark:bg-slate-900
+              border border-black/10 dark:border-white/10
+              rounded-xl md:rounded-2xl
+              p-3
+              shadow-xl
+              max-h-80
+              overflow-y-auto
+            "
+          >
+            {filteredWorkers.length === 0 ? (
+              <p className="text-slate-500">
+                No workers found
+              </p>
+            ) : (
+              filteredWorkers.map((worker) => (
+                <div
+                  key={worker._id}
+                  onClick={() => {
+                    setFormData((prev) => {
+                      const exists =
+                        prev.workers.includes(worker.user);
+
+                      return {
+                        ...prev,
+                        workers: exists
+                          ? prev.workers.filter(
+                              (id) => id !== worker.user
+                            )
+                          : [
+                              ...prev.workers,
+                              worker.user,
+                            ],
+                      };
+                    });
+                  }}
+                  className={`
+                    flex justify-between items-center
+                    px-4 py-3
+                    rounded-xl
+                    cursor-pointer
+                    mb-2
+                    transition
+
+                    ${
+                      formData.workers.includes(worker.user)
+                        ? "bg-cyan-500/20 border border-cyan-500"
+                        : "hover:bg-slate-100 dark:hover:bg-white/5"
+                    }
+                  `}
+                >
+                  <div>
+                    <p className="font-semibold">
+                      {worker.name}
+                    </p>
+
+                    <p className="text-sm text-slate-500">
+                      {worker.skills.join(", ")}
+                    </p>
+                  </div>
+
+                  {formData.workers.includes(worker.user) && (
+                    <span className="text-cyan-500 font-bold text-lg">
+                      ✓
+                    </span>
+                  )}
+                </div>
+              ))
+            )}
+          </div>
+        )}
+      </div>
+
+      {/* NOTE */}
+      <div className="mt-6">
+        <label className="block mb-2 font-medium text-sm md:text-base">
+          Note
+        </label>
+
+        <textarea
+          name="note"
+          rows="6"
+          placeholder="Enter task note..."
+          value={formData.note}
+          onChange={changeHandler}
+          className="
+            w-full
+            bg-slate-100 dark:bg-slate-900
+            border border-black/10 dark:border-white/10
+            rounded-xl md:rounded-2xl
+            px-4 py-3
+            outline-none
+            resize-none
+            focus:ring-2 focus:ring-cyan-500
+          "
+        />
+      </div>
+
+      {/* SUBMIT BUTTON */}
+      <div className="mt-8">
         <button
           type="submit"
-          className="mt-5 bg-cyan-500 hover:bg-cyan-400 transition px-8 py-3 rounded-2xl font-semibold text-black"
+          className="
+            w-full md:w-auto
+            bg-cyan-500
+            hover:bg-cyan-400
+            transition
+            px-8 py-3
+            rounded-xl md:rounded-2xl
+            font-semibold
+            text-black
+          "
         >
           Create Task
         </button>
+      </div>
 
-      </form>
+    </form>
 
-    </div>
-  );
+  </div>
+);
 }
 
 export default AdminCreateTask;
