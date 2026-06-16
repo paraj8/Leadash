@@ -8,6 +8,7 @@ import ResetPassword from "./pages/ResetPassword";
 import OtpVerify from "./pages/otpVerify.jsx";
 import Developer from "./pages/Developer.jsx";
 
+
 /* LAYOUTS */
 import AdminLayout from "./layouts/AdminLayout";
 import ManagerLayout from "./layouts/ManagerLayout.jsx";
@@ -28,6 +29,7 @@ import ManagerAllTasks from "./pages/manager/ManagerAllTasks.jsx";
 import ManagerCreateTask from "./pages/manager/ManagerCreateTask.jsx";
 import ManagerWorkers from "./pages/manager/ManagerWorkers.jsx";
 
+
 /* WORKER PAGES */
 import WorkerDashboard from "./pages/worker/WorkerDashboard.jsx";
 import WorkerProfile from "./pages/worker/WorkerProfile.jsx";
@@ -38,6 +40,9 @@ import ParajMandal from "./pages/team/ParajMandal.jsx";
 import VishalPramanik from "./pages/team/VishalPramanik.jsx";
 import HarshRaj from "./pages/team/HarshRaj.jsx";
 import BhaskarMandal from "./pages/team/BhaskarMandal.jsx";
+import VishalResume from "./pages/team/VishalResume.jsx";
+import HarshResume from "./pages/team/HarshResume.jsx";
+import BhaskarResume from "./pages/team/BhaskarResume.jsx";
 
 function App() {
   return (
@@ -89,6 +94,9 @@ function App() {
         <Route path="/team/vishal" element={<VishalPramanik />} />
         <Route path="/team/harsh" element={<HarshRaj />} />
         <Route path="/team/bhaskar" element={<BhaskarMandal />} />
+        <Route path="/team/VishalResume" element={<VishalResume />} /> 
+        <Route path="/team/HarshResume" element={<HarshResume/>} />
+        <Route path="/team/BhaskarResume" element={<BhaskarResume/>} />
 
       </Routes>
     </BrowserRouter>
