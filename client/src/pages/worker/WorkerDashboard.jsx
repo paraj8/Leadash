@@ -49,6 +49,26 @@ function WorkerDashboard() {
           View your assigned tasks and work progress
         </p>
 
+<div className="bg-yellow-500/10 border border-yellow-500/20 rounded-2xl p-4 mb-6">
+  <h3 className="text-yellow-600 dark:text-yellow-300 font-bold">
+    ⚠ Complete Your Profile
+  </h3>
+
+  <p className="text-sm mt-2">
+    Your profile is incomplete. Managers cannot view your profile until all
+    required details are filled.
+  </p>
+
+  <a
+    href="/worker/worker-profile"
+    className="inline-block mt-3 px-4 py-2 bg-yellow-500 text-black rounded-xl font-semibold"
+  >
+    Complete Profile
+  </a>
+</div>
+<p className="text-sm md:text-base text-slate-500 dark:text-slate-400 mt-2">
+  View your assigned tasks and work progress
+</p>
       </div>
 
       {/* ================= ALL TASKS ================= */}
